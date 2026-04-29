@@ -33,18 +33,4 @@
   tick();
   setInterval(tick, 1000);
 
-  // Apply-button gate — hidden entirely until launch time, then revealed.
-  var btn = document.getElementById('cl-apply');
-  if (btn) {
-    var launchAt = new Date(btn.getAttribute('data-launch-at')).getTime();
-    function refreshApply() {
-      if (Date.now() < launchAt) {
-        btn.setAttribute('hidden', '');
-      } else {
-        btn.removeAttribute('hidden');
-      }
-    }
-    refreshApply();
-    setInterval(refreshApply, 30000);
-  }
 })();
