@@ -6,4 +6,4 @@ title: Internship programme drafted
 
 Stream D added an internship track: two builders, 90 days, Hong Kong + Shenzhen. Recruit, contract, train.
 
-The recruitment build became a sub-program in its own right — pre-90 work to lock terms, draft a lawyer-aligned appointment letter, and design the intake. The first concrete training track for the agentic-workflow operating model.
+The recruitment build became a sub-program in its own right — pre-90 work to lock terms. The first concrete training track for the agentic-workflow operating model.
