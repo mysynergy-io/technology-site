@@ -319,6 +319,7 @@ body {
   transition: opacity 0.15s ease;
 }
 .cross-link__btn:hover { opacity: 0.85; }
+.cross-link__btn[hidden] { display: none; }
 
 /* ── Footer ─────────────────────────────────────────── */
 

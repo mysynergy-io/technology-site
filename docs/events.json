@@ -9,25 +9,92 @@
     "pinned": true
   },
   {
-    "src": "2026-04-29-internship-intake-live.md",
-    "date": "2026-04-29",
+    "src": "2026-04-18-brand-standards-locked.md",
+    "date": "2026-04-18",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "Brand standards locked"
+  },
+  {
+    "src": "2026-04-15-internship-programme-drafted.md",
+    "date": "2026-04-15",
     "tags": [
       "internship",
       "agentic-workflow"
     ],
-    "title": "2026 internship programme opens — agentic API path published",
-    "link_text": "Apply",
-    "link_url": "https://internship.mysynergy.technology"
+    "title": "Internship programme drafted"
   },
   {
-    "src": "2026-04-28-mcp-server-published.md",
-    "date": "2026-04-28",
+    "src": "2026-04-10-claude-joins.md",
+    "date": "2026-04-10",
     "tags": [
-      "agentic-workflow",
-      "internship"
+      "agentic-workflow"
     ],
-    "title": "MCP server published for the intake flow",
-    "link_text": "github.com/mysynergy-io/intake-mcp",
-    "link_url": "https://github.com/mysynergy-io/intake-mcp"
+    "title": "Claude"
+  },
+  {
+    "src": "2026-04-05-90-day-gantt.md",
+    "date": "2026-04-05",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "90-day plan locked"
+  },
+  {
+    "src": "2026-03-31-harness-goes-on.md",
+    "date": "2026-03-31",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "The harness goes on"
+  },
+  {
+    "src": "2026-03-28-agents-write-directly.md",
+    "date": "2026-03-28",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "Agents started writing directly"
+  },
+  {
+    "src": "2026-03-28-memory-governance.md",
+    "date": "2026-03-28",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "Memory governance"
+  },
+  {
+    "src": "2026-03-27-capability-profiles.md",
+    "date": "2026-03-27",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "Capability profiles per agent"
+  },
+  {
+    "src": "2026-03-25-operational-sheets-multiplied.md",
+    "date": "2026-03-25",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "Operational sheets multiplied"
+  },
+  {
+    "src": "2026-03-24-first-sheet-pbl.md",
+    "date": "2026-03-24",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "First sheet — the Process Build Log"
+  },
+  {
+    "src": "2026-03-05-openclaw-telegram.md",
+    "date": "2026-03-05",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "OpenClaw"
   }
 ]

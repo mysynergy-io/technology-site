@@ -1,7 +1,7 @@
 (function () {
-  // Target: 21 June 2026, 12:00 HKT/SGT (UTC+8)
+  // Target: 26 June 2026, 12:00 HKT/SGT (UTC+8)
   // ISO with explicit +08:00 offset so it doesn't drift on visitors in other zones.
-  var TARGET = new Date('2026-06-21T12:00:00+08:00').getTime();
+  var TARGET = new Date('2026-06-26T12:00:00+08:00').getTime();
 
   var elDays   = document.getElementById('cd-days');
   var elHours  = document.getElementById('cd-hours');
@@ -32,4 +32,19 @@
 
   tick();
   setInterval(tick, 1000);
+
+  // Apply-button gate — hidden entirely until launch time, then revealed.
+  var btn = document.getElementById('cl-apply');
+  if (btn) {
+    var launchAt = new Date(btn.getAttribute('data-launch-at')).getTime();
+    function refreshApply() {
+      if (Date.now() < launchAt) {
+        btn.setAttribute('hidden', '');
+      } else {
+        btn.removeAttribute('hidden');
+      }
+    }
+    refreshApply();
+    setInterval(refreshApply, 30000);
+  }
 })();

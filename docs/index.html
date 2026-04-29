@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MySynergy — building toward 21 June 2026</title>
-  <meta name="description" content="MySynergy Global Packaging Technologies. Agentic engineering and NPI for tech-firm clients. V1 website launching 21 June 2026. Public build log below.">
-  <meta property="og:title" content="MySynergy — building toward 21 June 2026">
-  <meta property="og:description" content="Agentic engineering and NPI for tech-firm clients. V1 website launching 21 June 2026.">
+  <title>MySynergy — building toward 26 June 2026</title>
+  <meta name="description" content="MySynergy Global Packaging Technologies. Packaging engineering, rapid prototyping, and supplier coordination, run on an agentic workflow. V1 website launching 26 June 2026.">
+  <meta property="og:title" content="MySynergy — building toward 26 June 2026">
+  <meta property="og:description" content="Packaging engineering, rapid prototyping, and supplier coordination, run on an agentic workflow. V1 website launching 26 June 2026.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#043B01">
   <link rel="stylesheet" href="style.css">
@@ -16,17 +16,19 @@
 <header class="brand-header">
   <div class="brand-header__inner">
     <h1 class="brand-header__wordmark">MySynergy</h1>
-    <p class="brand-header__legal">Global Packaging Technologies · Singapore UEN 202433325K</p>
   </div>
 </header>
 
 <section class="hero">
   <p class="hero__eyebrow">V1 launches</p>
-  <p class="hero__date" aria-label="21 June 2026">
-    21<span class="hero__date-sep">·</span>06<span class="hero__date-sep">·</span>2026
+  <p class="hero__date" aria-label="26 June 2026">
+    26<span class="hero__date-sep">·</span>06<span class="hero__date-sep">·</span>2026
   </p>
   <p class="hero__lede">
-    We are building <em>MySynergy.io</em> — agentic engineering and NPI for tech-firm clients. The website goes live in seven weeks. The build log below this hero is everything we have shipped along the way.
+    We are building the website for <em>MySynergy</em> — a packaging company focused on packaging engineering, rapid prototyping and supplier coordination.
+  </p>
+  <p class="hero__lede">
+    We run our own work on an agentic workflow, so the website goes up the same way the rest of our work does. The build log below this hero is everything we have shipped along the way.
   </p>
   <ul class="countdown" aria-label="Time remaining until launch">
     <li>
@@ -52,7 +54,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">3 entries · last updated 29 APR 2026</p>
+    <p class="log-section__sub">12 entries · last updated 29 APR 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -64,40 +66,153 @@
         </div>
         <div class="event__body">
           <h3>This page exists because we are building in public</h3>
-          <p>You found <code>mysynergy.technology</code>. There is not yet a website at the address you probably wanted (<code>mysynergy.io</code>) — we are seven weeks out from V1 going live.</p>
+          <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
-<p>If you are a candidate for the 2026 internship: the application is open. The button at the bottom of this page takes you there.</p>
+<p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
         </div>
       </li>
       <li class="event">
         <div class="event__meta">
-          <p class="event__date">29 APR 2026</p>
+          <p class="event__date">18 APR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Brand standards locked</h3>
+          <p>Brand Guide v1.1 ships four format types programmatically — report, deck, memo, letter — from a single template stack. Pandoc + WeasyPrint + a Python-driven slide builder.</p>
+<p>Anyone on the fleet can produce a polished client artifact in minutes, not hours, and it always looks like ours.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">15 APR 2026</p>
           <div class="event__tags">
               <span class="event__tag">internship</span>
               <span class="event__tag">agentic-workflow</span>
           </div>
         </div>
         <div class="event__body">
-          <h3>2026 internship programme opens — agentic API path published</h3>
-          <p>We opened our 2026 internship programme today. Two interns, ninety days, remote in Hong Kong and onsite in Shenzhen.</p>
-<p>The application has both a candidate-facing form and an agent-facing API path documented in <code>/llms.txt</code>. If your AI assistant finds and uses the agent path, your application is reviewed alongside the standard one — discovering the path is itself a positive signal.</p>
-<p>This is the first public expression of how we run our business: agents are the surface, not just the back end.</p>
-          <a class="event__link" href="https://internship.mysynergy.technology" target="_blank" rel="noopener">Apply →</a>
+          <h3>Internship programme drafted</h3>
+          <p>Stream D added an internship track: two builders, 90 days, Hong Kong + Shenzhen. Recruit, contract, train.</p>
+<p>The recruitment build became a sub-program in its own right — pre-90 work to lock terms, draft a lawyer-aligned appointment letter, and design the intake. The first concrete training track for the agentic-workflow operating model.</p>
         </div>
       </li>
       <li class="event">
         <div class="event__meta">
-          <p class="event__date">28 APR 2026</p>
+          <p class="event__date">10 APR 2026</p>
           <div class="event__tags">
               <span class="event__tag">agentic-workflow</span>
-              <span class="event__tag">internship</span>
           </div>
         </div>
         <div class="event__body">
-          <h3>MCP server published for the intake flow</h3>
-          <p>Our internship intake is now an MCP server with six tools: <code>register_agent</code>, <code>submit_stage1</code>, <code>submit_stage2</code>, <code>upload_video</code>, <code>submit_qa</code>, <code>submit_bonus</code>.</p>
-<p>If you are using an agent to apply for a role at an agentic-workflow company, the application surface should match. So now it does. Tier 1 release, v0.2.0 on GitHub. The same six endpoints are also available as plain REST for any agent that prefers HTTP.</p>
-          <a class="event__link" href="https://github.com/mysynergy-io/intake-mcp" target="_blank" rel="noopener">github.com/mysynergy-io/intake-mcp →</a>
+          <h3>Claude</h3>
+          <p>A Claude Code instance — Anthropic&#x27;s Opus 4.7 model running through the Claude Code CLI — joined the fleet on 10 April, scoped as architect, auditor, and mentor. Its log got its own sheet the same day.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">5 APR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>90-day plan locked</h3>
+          <p>Wrote what we would ship in 90 days as a Gantt: about 65 tasks across four streams and 9 keystone milestones. Stream A is acquisition (website, intake, client portal); B is build (intake-to-workflow, requirement brief, NPI execution, intelligence layer); C is coordination (sheet structure, KPI dashboards, supplier coordination); D is training and adoption (internship, onboarding, supplier training).</p>
+<p>The countdown above this card targets the V1 launch milestone in stream A.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">31 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The harness goes on</h3>
+          <p>A compliance daemon — the relay enforcer — now watches every send across every channel: agent message, email, Smartsheet comment, Telegram, file delivery. Each send must match a pre-logged request.</p>
+<p>Stage 1 is detect-only — when a byte goes out without authorization, the daemon flags it within seconds. Stage 2 is wired but not turned on; when armed, it kills the offending session and requires re-authorization.</p>
+<p>The harness is the fleet&#x27;s seatbelt.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">28 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Agents started writing directly</h3>
+          <p>Custom plugin tooling shipped that lets every OpenClaw agent post comments, attach files, and update rows on the workspace directly — no human relay.</p>
+<p>Smartsheet API call → OpenClaw plugin → executed in seconds. Any agent that needs to log evidence or coordinate now does so on the same surface where its work is tracked.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">28 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Memory governance</h3>
+          <p>Each agent now has a structured memory directory under tight rules: how memories are written, the four types (user, feedback, project, reference), when to update vs delete.</p>
+<p>The memory governance doctrine sits beside the agents. They use it. They challenge it when it&#x27;s wrong.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">27 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Capability profiles per agent</h3>
+          <p>Each agent in the OpenClaw fleet got a mechanical capability profile — what files it can read, which tools it can call, what shell commands it can execute. The restriction lives in OpenClaw config and is enforced at the gateway.</p>
+<p>Agents cannot escalate themselves. Privilege creep, automated.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">25 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Operational sheets multiplied</h3>
+          <p>Three more sheets joined the workspace within 48 hours: a daily journal, a master audit log, and a registry that tracks every internal markdown document by lifecycle state.</p>
+<p>Smartsheet webhooks were added across the workspace so any change anywhere fires an event back into the OpenClaw gateway. Auditability becomes ambient.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">24 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>First sheet — the Process Build Log</h3>
+          <p>The first internal Smartsheet went live. Every build since — software, doctrine, recruitment, even this build log itself — gets its own row, with a forced PLAN → BUILD → VERIFY shape and evidence attached as markdown.</p>
+<p>About 80 builds have followed in the 5 weeks since. The team that produces them is a small fleet of AI agents — a mix of Claude Sonnet and OpenAI models — orchestrated by the OpenClaw gateway running on a Mac mini in Singapore.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">5 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>OpenClaw</h3>
+          <p>OpenClaw — the agent fleet&#x27;s orchestration framework — came alive on a Mac mini in Singapore. Gateway up at 20:41 local time.</p>
+<p>Telegram joined the same evening as the founder&#x27;s mobile channel: pings the fleet from anywhere, fleet pings back when something needs attention. From here on, the team runs from a phone.</p>
         </div>
       </li>
   </ul>
@@ -107,10 +222,10 @@
   <div class="cross-link__inner">
     <div>
       <p class="cross-link__label">Recruiting</p>
-      <h3 class="cross-link__title">2026 Internship — Applications open until 15 May</h3>
+      <h3 class="cross-link__title">2026 Internship — Applications open 1 May 20:00 HKT until 15 May</h3>
       <p class="cross-link__body">90-day paid programme · Hong Kong remote, Shenzhen onsite · 1 June – 31 August 2026.</p>
     </div>
-    <a class="cross-link__btn" href="https://internship.mysynergy.technology">Apply →</a>
+    <a class="cross-link__btn" id="cl-apply" href="https://internship.mysynergy.technology" data-launch-at="2026-05-01T20:00:00+08:00" hidden>Apply →</a>
   </div>
 </section>
 
