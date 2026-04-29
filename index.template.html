@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MySynergy — building toward 21 June 2026</title>
+  <meta name="description" content="MySynergy Global Packaging Technologies. Agentic engineering and NPI for tech-firm clients. V1 website launching 21 June 2026. Public build log below.">
+  <meta property="og:title" content="MySynergy — building toward 21 June 2026">
+  <meta property="og:description" content="Agentic engineering and NPI for tech-firm clients. V1 website launching 21 June 2026.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#043B01">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="brand-header">
+  <div class="brand-header__inner">
+    <h1 class="brand-header__wordmark">MySynergy</h1>
+    <p class="brand-header__legal">Global Packaging Technologies · Singapore UEN 202433325K</p>
+  </div>
+</header>
+
+<section class="hero">
+  <p class="hero__eyebrow">V1 launches</p>
+  <p class="hero__date" aria-label="21 June 2026">
+    21<span class="hero__date-sep">·</span>06<span class="hero__date-sep">·</span>2026
+  </p>
+  <p class="hero__lede">
+    We are building <em>MySynergy.io</em> — agentic engineering and NPI for tech-firm clients. The website goes live in seven weeks. The build log below this hero is everything we have shipped along the way.
+  </p>
+  <ul class="countdown" aria-label="Time remaining until launch">
+    <li>
+      <p class="countdown__num countdown__num--green" id="cd-days">000</p>
+      <p class="countdown__label">Days</p>
+    </li>
+    <li>
+      <p class="countdown__num" id="cd-hours">00</p>
+      <p class="countdown__label">Hours</p>
+    </li>
+    <li>
+      <p class="countdown__num" id="cd-mins">00</p>
+      <p class="countdown__label">Minutes</p>
+    </li>
+    <li>
+      <p class="countdown__num" id="cd-secs">00</p>
+      <p class="countdown__label">Seconds</p>
+    </li>
+  </ul>
+  <p class="countdown__live">Counting down — Hong Kong time, UTC+8</p>
+</section>
+
+<section class="log-section">
+  <div class="log-section__head">
+    <h2 class="log-section__title">Build log</h2>
+    <p class="log-section__sub">{{EVENT_COUNT}} entries · last updated {{LAST_UPDATED}}</p>
+  </div>
+  <ul class="events">
+{{EVENTS}}
+  </ul>
+</section>
+
+<section class="cross-link">
+  <div class="cross-link__inner">
+    <div>
+      <p class="cross-link__label">Recruiting</p>
+      <h3 class="cross-link__title">2026 Internship — Applications open until 15 May</h3>
+      <p class="cross-link__body">90-day paid programme · Hong Kong remote, Shenzhen onsite · 1 June – 31 August 2026.</p>
+    </div>
+    <a class="cross-link__btn" href="https://internship.mysynergy.technology">Apply →</a>
+  </div>
+</section>
+
+<footer class="page-footer">
+  <div class="page-footer__inner">
+    <span>MySynergy Global Packaging Technologies Pte Ltd</span>
+    <span>Singapore · 160 Robinson Road · UEN 202433325K · 2026</span>
+  </div>
+</footer>
+
+<script src="countdown.js"></script>
+</body>
+</html>
