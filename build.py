@@ -142,6 +142,7 @@ def main():
     (DIST / 'index.html').write_text(html_out, encoding='utf-8')
     shutil.copy2(ROOT / 'style.css', DIST / 'style.css')
     shutil.copy2(ROOT / 'countdown.js', DIST / 'countdown.js')
+    shutil.copy2(ROOT / 'robots.txt', DIST / 'robots.txt')
     # Manifest for debugging / future RSS
     (DIST / 'events.json').write_text(json.dumps(
         [{'src': e['src'], **e['fm']} for e in events],
