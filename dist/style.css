@@ -319,15 +319,7 @@ body {
   transition: opacity 0.15s ease;
 }
 .cross-link__btn:hover { opacity: 0.85; }
-.cross-link__btn--disabled,
-.cross-link__btn--disabled:hover {
-  background: var(--paper-tint);
-  color: var(--slate-soft);
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 1;
-  border: 1px solid var(--rule);
-}
+.cross-link__btn[hidden] { display: none; }
 
 /* ── Footer ─────────────────────────────────────────── */
 

@@ -33,24 +33,15 @@
   tick();
   setInterval(tick, 1000);
 
-  // Apply-button gate — disabled until launch time, flips automatically.
+  // Apply-button gate — hidden entirely until launch time, then revealed.
   var btn = document.getElementById('cl-apply');
   if (btn) {
     var launchAt = new Date(btn.getAttribute('data-launch-at')).getTime();
-    var origHref = btn.getAttribute('href');
-    var origText = btn.textContent;
     function refreshApply() {
-      var now = Date.now();
-      if (now < launchAt) {
-        btn.classList.add('cross-link__btn--disabled');
-        btn.removeAttribute('href');
-        btn.setAttribute('aria-disabled', 'true');
-        btn.textContent = 'Opens 1 May · 20:00 HKT';
+      if (Date.now() < launchAt) {
+        btn.setAttribute('hidden', '');
       } else {
-        btn.classList.remove('cross-link__btn--disabled');
-        btn.setAttribute('href', origHref);
-        btn.removeAttribute('aria-disabled');
-        btn.textContent = origText;
+        btn.removeAttribute('hidden');
       }
     }
     refreshApply();
