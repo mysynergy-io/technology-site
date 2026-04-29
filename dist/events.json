@@ -1,0 +1,33 @@
+[
+  {
+    "src": "2026-04-29-this-page.md",
+    "date": "2026-04-29",
+    "tags": [
+      "website"
+    ],
+    "title": "This page exists because we are building in public",
+    "pinned": true
+  },
+  {
+    "src": "2026-04-29-internship-intake-live.md",
+    "date": "2026-04-29",
+    "tags": [
+      "internship",
+      "agentic-workflow"
+    ],
+    "title": "2026 internship programme opens — agentic API path published",
+    "link_text": "Apply",
+    "link_url": "https://internship.mysynergy.technology"
+  },
+  {
+    "src": "2026-04-28-mcp-server-published.md",
+    "date": "2026-04-28",
+    "tags": [
+      "agentic-workflow",
+      "internship"
+    ],
+    "title": "MCP server published for the intake flow",
+    "link_text": "github.com/mysynergy-io/intake-mcp",
+    "link_url": "https://github.com/mysynergy-io/intake-mcp"
+  }
+]
