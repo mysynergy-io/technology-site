@@ -78,7 +78,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">12 entries · last updated 29 APR 2026</p>
+    <p class="log-section__sub">13 entries · last updated 30 APR 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -93,6 +93,22 @@
           <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
 <p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">30 APR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">internship</span>
+              <span class="event__tag">infrastructure</span>
+              <span class="event__tag">launch</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Three stages, one Worker</h3>
+          <p>The application portal — three candidate-facing stages plus an agent-API path — is one Cloudflare Worker, one set of static pages, and a few KV + R2 buckets. No app server. No operator standing by during traffic. The form itself does the receiving.</p>
+<p>We tested every stage end-to-end today, including the 90 MB video upload path, the magic-link expiry, and the duplicate-submit gate (it returns a clean 410 instead of a duplicate row).</p>
+<p>Applications open tomorrow night at 20:00 HKT. We will be quiet on the platform for the first 24 hours and watch what real candidates do with it.</p>
         </div>
       </li>
       <li class="event">
