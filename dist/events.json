@@ -9,6 +9,15 @@
     "pinned": true
   },
   {
+    "src": "2026-06-16-agents-that-live-in-the-sheet.md",
+    "date": "2026-06-16",
+    "tags": [
+      "agentic-workflow",
+      "architecture"
+    ],
+    "title": "Agents that live in the sheet"
+  },
+  {
     "src": "2026-06-16-golden-rule-delivery.md",
     "date": "2026-06-16",
     "tags": [

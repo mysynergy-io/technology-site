@@ -78,7 +78,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">21 entries · last updated 16 JUN 2026</p>
+    <p class="log-section__sub">22 entries · last updated 16 JUN 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -93,6 +93,22 @@
           <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
 <p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">16 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Agents that live in the sheet</h3>
+          <p>Most automation reads a spreadsheet, does something elsewhere, then writes a result back. We turned that inside out. The sheet isn&#x27;t a data source the agent visits — it&#x27;s the room the agent lives in.</p>
+<p>An agent assigned to a sheet watches its own rows, acts when one changes, and writes its work back in place. The sheet is the interface, the queue, and the audit trail at once — what you see is exactly what the agent sees.</p>
+<p>The guardrails aren&#x27;t prompts politely asking it to behave. They&#x27;re deterministic code gates around every write: an agent can only touch its own rows, only the columns it owns, and every change is logged. We ran it overnight against dozens of adversarial scenarios — zero improper edits.</p>
+<p>When the operating surface is the same one your team already reads, nobody has to ask the agent what it did. It&#x27;s right there.</p>
         </div>
       </li>
       <li class="event">
