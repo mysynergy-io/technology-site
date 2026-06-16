@@ -78,7 +78,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">15 entries · last updated 11 JUN 2026</p>
+    <p class="log-section__sub">21 entries · last updated 16 JUN 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -93,6 +93,99 @@
           <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
 <p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">16 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">delivery-management</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The golden rule of delivery management</h3>
+          <p>A purchase order is a promise of quantity. We track every one through four states: received → placed → shipped → invoiced.</p>
+<p>The golden rule: for each component, everything placed to suppliers over time = ordered quantity × bill-of-materials factor. When the deal closes cleanly, ordered = placed = shipped = invoiced.</p>
+<p>The math is the easy part. The real work is the exceptions: multi-part assemblies, parts dual-sourced across two suppliers, a BOM that lags what was actually bought, one invoice covering several deliveries. The rule handles ~90% deterministically. For the other 10%, the agent flags for help instead of guessing — asking is a feature, not a failure.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">16 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Let the fleet run, I just watched</h3>
+          <p>Handed the agent fleet 10 real business transactions and told it to replay them end-to-end. Each agent owned one slice of the work. I didn&#x27;t touch a thing — watch-only.</p>
+<p>Result: data 100% correct across all 10. Margins computed, no duplicates, every record matched its source.</p>
+<p>But the automated checker passed 0 of 10 — flagged &quot;missing evidence&quot; on every single one.</p>
+<p>The catch: the fleet wasn&#x27;t wrong. <em>My checker was.</em> The evidence-matcher missed files named for the base order number when the line carried a suffix. The agents did their jobs; the scaffolding I wrote to grade them had the bug.</p>
+<p>Building in public means publishing that part too.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">16 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">persistence</span>
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>What happens when you give an AI agent fleet a real database</h3>
+          <p>Spent the day putting a real persistence layer under a multi-agent fleet. Three things I wanted to prove, all held.</p>
+<p>• Structural firewall. Cost data and price data live in two separate ledgers — they physically cannot touch. The only place they meet is one audited sync, and margin is computed only at that join. You can&#x27;t accidentally leak a supplier cost into a customer-facing number.</p>
+<p>• Shadow, not cutover. Bidirectional sync every 10 minutes against the system-of-record, which stays the single source of truth. The new layer mirrors; it never overrides.</p>
+<p>• A budget that actually stops. Set a hard spend cap, then had an agent try to run anyway. The system rejected it <em>before any execution</em> — no run, no cost.</p>
+<p>Verdict: foundation go, no cutover. Earn trust in shadow first.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">13 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">tooling</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Build where you live</h3>
+          <p>We stopped forcing big builds out of chat and into a terminal. Our operator now completes large multi-step builds inline, in the same Telegram thread he talks in — no turn-caps, no SSH handoff that snaps the workflow mid-build. Tooling should bend to where the work actually happens. Backed by a 1-year headless auth token that ended the recurring 8-hour outages.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">13 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">debugging</span>
+              <span class="event__tag">infrastructure</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Don&#x27;t rebuild what regressed</h3>
+          <p>Our agent&#x27;s Telegram channel had run 7–16s for three months, then suddenly went sluggish. Instinct says redesign. Wrong move. We pulled the time-series, found a hard cliff at one specific change (an async-worker rewrite), and reverted just that. Back to ~4s.</p>
+<p>Lesson: when something with a long working history breaks, it&#x27;s a regression — find the cliff, don&#x27;t redesign the system.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">12 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">internship</span>
+              <span class="event__tag">discovery</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Discovery-interview engine</h3>
+          <p>This week our ops intern is running structured 1:1 discovery interviews across the supply chain — sales, sourcing, regional ops, design. One session a day, sequenced so each conversation builds on the last.</p>
+<p>Each interview is built around a single opener — <em>&quot;walk me through your actual day-to-day&quot;</em> — then probes where the real work lives: the decisions that happen off-sheet, the tacit knowledge nobody&#x27;s written down, the manual workarounds.</p>
+<p>The output isn&#x27;t notes. It&#x27;s a ranked shortlist of which workflows an agent can take over next.</p>
         </div>
       </li>
       <li class="event">

@@ -9,6 +9,62 @@
     "pinned": true
   },
   {
+    "src": "2026-06-16-golden-rule-delivery.md",
+    "date": "2026-06-16",
+    "tags": [
+      "delivery-management",
+      "agentic-workflow"
+    ],
+    "title": "The golden rule of delivery management"
+  },
+  {
+    "src": "2026-06-16-let-the-fleet-run.md",
+    "date": "2026-06-16",
+    "tags": [
+      "agentic-workflow",
+      "verification"
+    ],
+    "title": "Let the fleet run, I just watched"
+  },
+  {
+    "src": "2026-06-16-real-database-under-fleet.md",
+    "date": "2026-06-16",
+    "tags": [
+      "persistence",
+      "architecture",
+      "agentic-workflow"
+    ],
+    "title": "What happens when you give an AI agent fleet a real database"
+  },
+  {
+    "src": "2026-06-13-build-where-you-live.md",
+    "date": "2026-06-13",
+    "tags": [
+      "tooling",
+      "agentic-workflow"
+    ],
+    "title": "Build where you live"
+  },
+  {
+    "src": "2026-06-13-dont-rebuild-what-regressed.md",
+    "date": "2026-06-13",
+    "tags": [
+      "debugging",
+      "infrastructure"
+    ],
+    "title": "Don't rebuild what regressed"
+  },
+  {
+    "src": "2026-06-12-discovery-interview-engine.md",
+    "date": "2026-06-12",
+    "tags": [
+      "internship",
+      "discovery",
+      "agentic-workflow"
+    ],
+    "title": "Discovery-interview engine"
+  },
+  {
     "src": "2026-06-11-first-intern-in.md",
     "date": "2026-06-11",
     "tags": [
