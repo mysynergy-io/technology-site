@@ -78,7 +78,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">22 entries · last updated 16 JUN 2026</p>
+    <p class="log-section__sub">23 entries · last updated 19 JUN 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -93,6 +93,22 @@
           <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
 <p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">19 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">reliability</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>A backup that fails differently</h3>
+          <p>A backup built on the same foundation as the thing it protects isn&#x27;t really a backup. If your primary system goes down because its provider had an outage, a standby running on that same provider is already down too. You find out the redundancy was an illusion at the worst possible moment.</p>
+<p>So we built our orchestration agent a standby that runs on a different AI provider entirely — on purpose. When the primary can&#x27;t be reached, the standby automatically picks up the channel and holds it in a deliberately narrow role: report status, triage, point a human to the fix, and refuse anything heavier. It keeps the lights on for a few hours, not the whole operation, and it steps back the moment the primary recovers.</p>
+<p>The unexpected dividend was the second mind. Because the standby is a genuinely different model, not a copy of the first, it makes a real independent reviewer. On its first real task we pointed it at a system the primary had just built — and it immediately found a live bug the primary couldn&#x27;t see in its own work.</p>
+<p>Redundancy only counts if it fails differently from the thing it&#x27;s backing up. And a second opinion is only worth having if it can actually disagree.</p>
         </div>
       </li>
       <li class="event">

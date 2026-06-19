@@ -9,6 +9,15 @@
     "pinned": true
   },
   {
+    "src": "2026-06-19-a-backup-that-fails-differently.md",
+    "date": "2026-06-19",
+    "tags": [
+      "architecture",
+      "reliability"
+    ],
+    "title": "A backup that fails differently"
+  },
+  {
     "src": "2026-06-16-agents-that-live-in-the-sheet.md",
     "date": "2026-06-16",
     "tags": [
