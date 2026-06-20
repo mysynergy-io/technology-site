@@ -9,6 +9,15 @@
     "pinned": true
   },
   {
+    "src": "2026-06-20-automate-up-to-the-decision.md",
+    "date": "2026-06-20",
+    "tags": [
+      "agentic-workflow",
+      "architecture"
+    ],
+    "title": "Automate everything except the decision"
+  },
+  {
     "src": "2026-06-19-a-backup-that-fails-differently.md",
     "date": "2026-06-19",
     "tags": [
