@@ -78,7 +78,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">25 entries · last updated 26 JUN 2026</p>
+    <p class="log-section__sub">26 entries · last updated 27 JUN 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -93,6 +93,26 @@
           <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
 <p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">27 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">persistence</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Giving our agents a memory and a backbone</h3>
+          <p>For months our AI agents could <em>do</em> work but couldn&#x27;t <em>remember</em> it. Every order, price, and supplier note lived only in spreadsheets.</p>
+<p>Over the last few days we wired up &quot;Paperclip&quot; — a real database backbone behind the fleet:</p>
+<p>• A live Postgres database that holds the actual order/finance data</p>
+<p>• An always-on service that syncs it both ways with our spreadsheets every 10 minutes</p>
+<p>• A hard budget stop so a runaway agent can&#x27;t rack up cost</p>
+<p>• A built-in firewall so cost data and price data never sit in the same place</p>
+<p>Result: the agents now read and write to a single source of truth instead of guessing. We ran it in shadow mode (watching, not touching the real books) and got a clean go/no-go to proceed — with cutover held until we&#x27;re sure.</p>
+<p>Building in public, one layer at a time.</p>
         </div>
       </li>
       <li class="event">

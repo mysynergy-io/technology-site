@@ -9,6 +9,15 @@
     "pinned": true
   },
   {
+    "src": "2026-06-27-memory-and-a-backbone.md",
+    "date": "2026-06-27",
+    "tags": [
+      "persistence",
+      "architecture"
+    ],
+    "title": "Giving our agents a memory and a backbone"
+  },
+  {
     "src": "2026-06-26-study-before-you-adopt.md",
     "date": "2026-06-26",
     "tags": [
