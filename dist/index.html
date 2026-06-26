@@ -78,7 +78,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">24 entries · last updated 20 JUN 2026</p>
+    <p class="log-section__sub">25 entries · last updated 26 JUN 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -93,6 +93,21 @@
           <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
 <p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">26 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Study an open-source framework before you adopt it</h3>
+          <p>We&#x27;ve been evaluating an open-source agent-orchestration framework to sit under our own fleet. The tempting move is to adopt the whole thing and refactor later. We did the opposite — read it one layer at a time, and held all adoption until we actually understood each layer.</p>
+<p>So far we&#x27;ve mapped three: orchestration (how agents take work and report back), persistence (an 85-table data model with a real two-ledger split between cost and price), and execution (how a task actually runs). Each layer taught us where it fits us and where it doesn&#x27;t — its model assumes software repos and diffs; our deliverables are physical packaging and documents, so parts of it map cleanly and parts don&#x27;t.</p>
+<p>The discipline is the point. Understanding before adopting is slower up front and far cheaper than ripping out something you bolted on before you understood it.</p>
         </div>
       </li>
       <li class="event">

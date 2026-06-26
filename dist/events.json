@@ -9,6 +9,15 @@
     "pinned": true
   },
   {
+    "src": "2026-06-26-study-before-you-adopt.md",
+    "date": "2026-06-26",
+    "tags": [
+      "architecture",
+      "agentic-workflow"
+    ],
+    "title": "Study an open-source framework before you adopt it"
+  },
+  {
     "src": "2026-06-20-automate-up-to-the-decision.md",
     "date": "2026-06-20",
     "tags": [
