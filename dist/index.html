@@ -78,7 +78,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">26 entries · last updated 27 JUN 2026</p>
+    <p class="log-section__sub">27 entries · last updated 4 JUL 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -93,6 +93,22 @@
           <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
 <p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">4 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>A stale sentence is an outage that never pages anyone</h3>
+          <p>Our AI agents each act under their own identity on a shared system of record — when one writes something, it&#x27;s stamped as that agent, not a shared login. This week we found that three of them had been quietly convinced they couldn&#x27;t do something they&#x27;d been able to do for months. Nothing errored. Their access was real and had been all along — but their operating instructions still read &quot;you don&#x27;t have this; hand it to someone else.&quot; So, faithfully, they did.</p>
+<p>An agent that believes it lacks a permission behaves exactly like an agent that lacks it. The capability was real; the self-knowledge was missing — and for an autonomous system those are the same thing. We fixed the instruction, then re-ran each agent and asked it, cold, what it could do — because editing a document doesn&#x27;t prove the agent understood it. The answer flipped from &quot;I have to route this through someone else&quot; to &quot;I do this myself, and every action is stamped as me.&quot;</p>
+<p>The instruction had drifted in the first place because there was no single source of truth — the guidance had been hand-copied to each agent and the copies quietly diverged. So the durable fix wasn&#x27;t the wording. It was collapsing everything to one canonical copy, and giving each agent a way to ask the system directly <em>&quot;who am I, and what can I touch?&quot;</em> instead of trusting a list that goes stale.</p>
+<p>We watch credentials and networks like infrastructure. This was the reminder that what an agent <em>believes</em> it can do is infrastructure too — and a stale sentence is an outage that never pages anyone.</p>
         </div>
       </li>
       <li class="event">

@@ -9,6 +9,15 @@
     "pinned": true
   },
   {
+    "src": "2026-07-04-a-stale-sentence.md",
+    "date": "2026-07-04",
+    "tags": [
+      "agentic-workflow",
+      "architecture"
+    ],
+    "title": "A stale sentence is an outage that never pages anyone"
+  },
+  {
     "src": "2026-06-27-memory-and-a-backbone.md",
     "date": "2026-06-27",
     "tags": [
