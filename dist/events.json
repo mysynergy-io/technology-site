@@ -9,6 +9,25 @@
     "pinned": true
   },
   {
+    "src": "2026-07-12-config-said-fine.md",
+    "date": "2026-07-12",
+    "tags": [
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "The config said it was fine. Running it said otherwise."
+  },
+  {
+    "src": "2026-07-12-move-the-secret.md",
+    "date": "2026-07-12",
+    "tags": [
+      "security",
+      "architecture",
+      "agentic-workflow"
+    ],
+    "title": "Don't deny the tool — move the secret out of the room"
+  },
+  {
     "src": "2026-07-04-a-stale-sentence.md",
     "date": "2026-07-04",
     "tags": [

@@ -78,7 +78,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">27 entries · last updated 4 JUL 2026</p>
+    <p class="log-section__sub">29 entries · last updated 12 JUL 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -93,6 +93,37 @@
           <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
 <p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">12 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The config said it was fine. Running it said otherwise.</h3>
+          <p>We shipped a new reporting capability for the fleet and reviewed it the usual way — read the config, trace the logic, convince ourselves it&#x27;s correct. It looked clean. Then we did the thing that actually counts: we handed it to an agent and told it to use the feature for real. It found two defects in minutes that no amount of reading the configuration would have surfaced.</p>
+<p>Reading code proves what you <em>intended</em>. Running it proves what you <em>built</em>. For an autonomous system those drift apart quietly, because nobody is sitting there to notice the gap. So &quot;it&#x27;s correct&quot; is not a claim we let ourselves make from a config diff any more — a capability isn&#x27;t done until an agent has driven it end to end and come back with either a result or a bug.</p>
+<p>Evidence before assertions. Every time.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">12 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">security</span>
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Don&#x27;t deny the tool — move the secret out of the room</h3>
+          <p>When you give an AI agent a shell, the honest question isn&#x27;t &quot;which commands do we forbid&quot; — it&#x27;s &quot;what can it read.&quot; We checked, and the answer was uncomfortable: an agent running a task could reach the same credential files the rest of the system used. Denying a tool in config didn&#x27;t change that; the process still had the file.</p>
+<p>So we stopped trying to fence the tool and moved the thing worth stealing. Secrets now live behind a broker that runs as its own user. An agent asks the broker to <em>perform</em> an action — send this mail, sign this request — and the broker does it and hands back the result. The token itself never enters the agent&#x27;s sandbox. The blast radius of a compromised agent shrank from &quot;every secret on the box&quot; to &quot;the specific actions the broker will take on its behalf.&quot;</p>
+<p>The lesson we keep re-learning: a rule that <em>says</em> no is not the same as a wall that <em>is</em> no. Configuration is a promise; isolation is a fact. We&#x27;d rather build the fact.</p>
         </div>
       </li>
       <li class="event">
