@@ -9,6 +9,122 @@
     "pinned": true
   },
   {
+    "src": "2026-08-12-three-days-on-site.md",
+    "date": "2026-08-12",
+    "tags": [
+      "supply-chain",
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "Three days on site with the people who use it"
+  },
+  {
+    "src": "2026-08-10-false-alarm-costs-more.md",
+    "date": "2026-08-10",
+    "tags": [
+      "verification",
+      "agentic-workflow",
+      "architecture"
+    ],
+    "title": "A false alarm costs more than the outage it warns about"
+  },
+  {
+    "src": "2026-08-07-typo-became-identity.md",
+    "date": "2026-08-07",
+    "tags": [
+      "architecture",
+      "supply-chain",
+      "verification"
+    ],
+    "title": "A mistyped character became a permanent identity"
+  },
+  {
+    "src": "2026-08-05-reviewed-by-a-different-vendor.md",
+    "date": "2026-08-05",
+    "tags": [
+      "agentic-workflow",
+      "verification",
+      "architecture"
+    ],
+    "title": "We have an AI review our AI's code, and we put it on a different vendor"
+  },
+  {
+    "src": "2026-08-03-checks-that-fail-open.md",
+    "date": "2026-08-03",
+    "tags": [
+      "verification",
+      "infrastructure"
+    ],
+    "title": "Five checks that fail open, in the plan written to prevent exactly that"
+  },
+  {
+    "src": "2026-08-01-running-was-true-of-the-process.md",
+    "date": "2026-08-01",
+    "tags": [
+      "infrastructure",
+      "verification",
+      "architecture"
+    ],
+    "title": "\"Running\" was true of the process and false of the function"
+  },
+  {
+    "src": "2026-07-30-asking-nobody.md",
+    "date": "2026-07-30",
+    "tags": [
+      "agentic-workflow",
+      "verification"
+    ],
+    "title": "We were asking for approval, and nobody was being asked"
+  },
+  {
+    "src": "2026-07-28-alarm-that-could-not-ring.md",
+    "date": "2026-07-28",
+    "tags": [
+      "verification",
+      "agentic-workflow",
+      "architecture"
+    ],
+    "title": "The alarm that could not ring"
+  },
+  {
+    "src": "2026-07-26-nine-clean-reviews.md",
+    "date": "2026-07-26",
+    "tags": [
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "Nine clean reviews, and the bug that only existed in the combination"
+  },
+  {
+    "src": "2026-07-24-eighty-seven-files.md",
+    "date": "2026-07-24",
+    "tags": [
+      "infrastructure",
+      "verification"
+    ],
+    "title": "Eighty-seven files were running in production and none of them were in version control"
+  },
+  {
+    "src": "2026-07-21-approved-is-a-claim.md",
+    "date": "2026-07-21",
+    "tags": [
+      "agentic-workflow",
+      "verification",
+      "supply-chain"
+    ],
+    "title": "\"Approved\" is a claim, not a fact"
+  },
+  {
+    "src": "2026-07-19-library-that-was-not-there.md",
+    "date": "2026-07-19",
+    "tags": [
+      "infrastructure",
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "The machine had been running on a library that no longer existed"
+  },
+  {
     "src": "2026-07-12-config-said-fine.md",
     "date": "2026-07-12",
     "tags": [

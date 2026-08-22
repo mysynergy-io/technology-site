@@ -78,7 +78,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">29 entries · last updated 12 JUL 2026</p>
+    <p class="log-section__sub">41 entries · last updated 12 AUG 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -93,6 +93,205 @@
           <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
 <p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">12 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">supply-chain</span>
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Three days on site with the people who use it</h3>
+          <p>Our supply-chain system had been running in test for months and passing. This month our project lead spent three days in Vietnam, at the premises of the supplier whose operations lead owns two of its sheets, training her team and watching them work.</p>
+<p>Before the visit we did the obvious check: does she have what our existing tester has? She didn&#x27;t — she was short six screens, all of them the delivery and fulfilment chain she personally owns, including the one report that summarises her own two sheets. She was the only tester in the system without it. We would have run three days of training with the person whose work it describes unable to open it.</p>
+<p>They came back with eleven problems. We fixed none of them on the spot, deliberately — every one was diagnosed against live code and data first, because the fastest way to turn one report into three defects is to fix it in the room. Then we asked our reviewer to attack the diagnosis, and it overturned the two we had confidently marked <em>no defect</em>. Both were real. One of them worked only while an order line stayed with a single supplier, which made it operational discipline we had been calling a system guarantee.</p>
+<p>Then it named ten more scenarios missing from the list of eleven entirely. Nobody had reported those, because nobody had hit them yet.</p>
+<p>Three days in a room with the people who do the work found more than the previous month of green test runs. That isn&#x27;t a criticism of the tests. It&#x27;s what tests are for, and what they can&#x27;t do.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">10 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>A false alarm costs more than the outage it warns about</h3>
+          <p>We test against a sandbox company in our accounting system. It is rebuilt roughly every month under a new internal identifier. Our code pins that identifier and fails closed when it stops matching — which is the correct behaviour, and completely silent. Writes simply stop, and someone mid-test watches purchase orders quit working with no explanation.</p>
+<p>So we built a watcher to tell people before it happens. Two rules shaped it, and both came out of the review rather than the design.</p>
+<p>A failed read is never a reset. A dead connection, a rejected credential, an empty list, or no sandbox visible at all — every one of those returns <em>cannot tell</em> and sends nothing. It is tempting to treat &quot;I can&#x27;t see it&quot; as &quot;it&#x27;s gone,&quot; and that is how you send someone chasing a change that never happened. Do that twice and the group learns to ignore the alert, which costs far more than the outage the alert exists for.</p>
+<p>And delivery outranks duplicate suppression. Our first version recorded the event as seen and <em>then</em> sent the message, so a single failed send would have marked it handled and nobody would ever have been told. Inverted: it records what it saw separately from what it successfully delivered, and keeps trying until someone has actually been told.</p>
+<p>An alert system&#x27;s job is not to notice. It&#x27;s to be believed, and to arrive.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">7 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">supply-chain</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>A mistyped character became a permanent identity</h3>
+          <p>Someone typed a zero where the letter belonged, in a free-text field on a delivery record. Nothing checked it, because nothing had ever needed to.</p>
+<p>Downstream, that string was used to build the durable identity of the shipment in our ledger. From that moment the typo was load-bearing. The shipment became invisible to everything matching the real pattern — it was reported, correctly and uselessly, as a missing delivery. And it could no longer be fixed cheaply: the recorder is idempotent on that identity, so changing the number makes the lookup miss and appends a <em>second</em> delivery instead of correcting the first. Two thousand units against an order of one thousand, on a ledger that only ever appends.</p>
+<p>The defect is not the typing. People will always mistype, and a field that a person fills in by hand is not the place to be surprised by that. The defect is that an unvalidated free-text field silently became a key.</p>
+<p>Our first proposal was to warn on a malformed number rather than block it, so a typo could never hold up an invoice. The reviewer rejected the framing outright: a malformed identifier is not cosmetic once it is durable identity, and a warning issued after the bad key exists is toothless. It now refuses before the record is written. The one bad record we already had is grandfathered by its exact combination — not by its shape, which would have let the next one through.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">5 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">verification</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>We have an AI review our AI&#x27;s code, and we put it on a different vendor</h3>
+          <p>As of this month, every code change to our supply-chain system is reviewed by a second AI before it runs. No size threshold. Fixes, refactors and test-only changes included, the plan as well as the implementation. Reviewing it after it lands doesn&#x27;t count. The single exception is a live incident, which ships first and is reviewed immediately after, with the incident written down.</p>
+<p>It runs on a different vendor&#x27;s model, deliberately. A reviewer that shares a provider with the thing it reviews shares its blind spots and its bad days, and goes down in the same outage.</p>
+<p>It has earned the gate in a month. It caught a value that crashed rather than merely slipping through, on the path that handles money. It refused a fix of ours as best-effort and made us do it fail-closed, pointing out that our own argument contradicted itself two sentences apart — and it was right. It stopped us replaying weeks-old gaps at real suppliers, where a repair would have read as a fresh request. It reframed what we had filed as a cosmetic typo as durable identity, which is what it actually was. And when we said we had checked everywhere for something, it asked once more, and found a seventh place we had missed.</p>
+<p>The value isn&#x27;t a second opinion. It&#x27;s a reviewer with no stake in the design being right.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">3 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">infrastructure</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Five checks that fail open, in the plan written to prevent exactly that</h3>
+          <p>After the failover we wrote a disaster-recovery plan with guards in it, so the thing that had just happened could not happen again. Then it was reviewed, and the review found five defects — every one of them in a guard, and every one the same disease the plan was written to cure.</p>
+<p>A guard meant to refuse a dangerous sync blocked only on an empty value or one exact lowercase string; anything truncated or corrupted sailed through, including the case that caused the incident. A restore probe looped over the output of a remote command, so when the connection was refused the loop body never ran and the check passed having examined zero files. A gap counter was set inside a piped loop and lost to a subshell, so the preflight always exited clean. The marker file that decides which machine is the primary was itself copied by the sync it governs — the mechanism would have destroyed itself on the first successful run. And a heartbeat assertion read the log file that is the job&#x27;s own output, so a blocked run refreshed it and passed.</p>
+<p>Not one was found by the person who wrote them, and that person was writing the doctrine against this exact failure at the same time. Knowing the pattern by name is not protection from it. An independent reader is.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">1 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">infrastructure</span>
+              <span class="event__tag">verification</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>&quot;Running&quot; was true of the process and false of the function</h3>
+          <p>We ran the fleet from the backup host for a few days. Our own notes said the backup was serving. It was serving a subset — and we didn&#x27;t know that, because the status board said everything was up.</p>
+<p>Three faults were stacked underneath. A required library was missing from the backup&#x27;s runtime, so the listener crash-looped and two of our checks had been failing on every ten-minute sweep since cutover. A tunnel binary wasn&#x27;t installed, and both service definitions hard-coded a processor-architecture path that doesn&#x27;t exist on that machine. And the old primary still held the tunnel registration, so traffic was being routed to a host that refused it.</p>
+<p>The sweep process was alive throughout. That&#x27;s what the board was reporting — a process, not a function. Every event and every request routed through that pipeline in those days was lost, and the indicator next to it said Running the entire time.</p>
+<p>While chasing something unrelated, we opened the sheet where backup health is logged. Its most recent entry was dated four months earlier. Neither job had recorded a single run since April, and the last rows named a machine two moves out of date. The surface we monitor to know the backups are fine had been silent since spring, and the silence had been reading as <em>nothing to report</em>.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">30 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>We were asking for approval, and nobody was being asked</h3>
+          <p>Our agents request human approval by commenting on the record and tagging the person who has to decide. The comments were going out. They read correctly. They notified no one — the platform only alerts on an account address, and a plain name with an at-sign in front of it is just prose. We had built a polite request into the void.</p>
+<p>Nothing errored, because nothing failed. A comment was posted, exactly as designed. The only reason we found it is that a person asked why a decision was taking so long.</p>
+<p>The one-line fix was the easy part. The durable fix was refusing to let any part of the system type a person&#x27;s address at the point of use: there is now a single registry of who exists, every alert resolves a name through it, an unknown name raises rather than degrading, and a test fails the build if an address is hard-coded at a call site. When a person changes, one line changes.</p>
+<p>A notification you can watch leave is not a notification anyone received. We check the receiving end now — and we found two more of these later, on a different surface, for the same reason.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">28 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The alarm that could not ring</h3>
+          <p>We audited our own monitoring and found an alarm for records that arrive but never get registered. It sat in the table with a twenty-minute threshold, next to the others, looking like a thing that worked.</p>
+<p>Its trigger name appears nowhere else in the codebase. No classifier could ever produce it, and nothing scanned that sheet at all. It had never fired because it was structurally incapable of firing. Underneath it, a third of a test run had been sitting untouched for a full day.</p>
+<p>The lesson is not that we forgot to wire it up. It&#x27;s that the whole process — us included — reads silence as health. For a day, everyone looked at a quiet dashboard and concluded nothing was wrong, and the dashboard was quiet because it was disconnected. An alert you have never seen fire and an alert that cannot fire look identical from the outside, and the second one is worse than having no alert at all, because it occupies the space where a real one would go.</p>
+<p>We now require every alarm to prove it can ring — a test that deliberately creates the condition and asserts the alert appears. Not that the code is correct. That the alarm <em>reaches someone</em>.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">26 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Nine clean reviews, and the bug that only existed in the combination</h3>
+          <p>We shipped a consolidated batch of eighteen changes in three waves. Every wave was reviewed. Nine separate reviews, each one clean, each one honest.</p>
+<p>Then we did a whole-branch review over the composed difference — everything together, as it would actually run — and it found a real defect that all nine had missed. A blank or conflicting purchase-order number made the intake agent falsely report a missing part number on perfectly valid lines and strand the record. Every per-task review had happened to use a valid number, so every per-task review passed correctly. The bug did not exist in any single change. It existed in the combination.</p>
+<p>That&#x27;s the uncomfortable bit. Nobody was careless. There was no review to point at and say <em>you should have caught this</em>, because the thing to catch wasn&#x27;t inside any of the nine diffs being read.</p>
+<p>So the rule we wrote down is: for changes that cut across each other, whole-branch review is not optional, and it is not a formality after the per-task ones. Nine green reviews of nine correct changes do not add up to a green branch. They add up to nine correct changes and an untested composition.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">24 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">infrastructure</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Eighty-seven files were running in production and none of them were in version control</h3>
+          <p>We went looking for something else and found that eighty-seven Python files had fallen through a deny-all ignore rule and were not under version control at all. Not stale, not on a branch — absent. They were running in production the entire time, doing real work, and any one of them could have been edited or lost with no history and no way to tell what changed. Ten test suites covering already-shipped work were in the same state.</p>
+<p>Nothing was broken, which is exactly why it survived. The system worked, so nobody asked the question that would have surfaced it. The ignore rule was deliberate — deny everything, allow what we name — and it did precisely what it was told. The failure was that adding a file and adding it to the allow list are two actions, and only one of them is enforced by anything.</p>
+<p>All eighty-seven went in that day. The durable change is the assumption we retired: <em>if it&#x27;s running, it must be committed</em> was never true, and we had no check that could have told us otherwise. We have one now.</p>
+<p>There&#x27;s a version of this in every codebase that has ever had a convenient ignore rule. It&#x27;s worth twenty seconds to go and look.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">21 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">verification</span>
+              <span class="event__tag">supply-chain</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>&quot;Approved&quot; is a claim, not a fact</h3>
+          <p>Part of our supply-chain system acts on purchase orders the moment they&#x27;re marked &quot;approved&quot; in the accounting system — pulls the document, records the order, moves on. The risk hides in plain sight: the software trusts a status, and anything that reaches that status gets acted on.</p>
+<p>So it doesn&#x27;t take the status on faith. An order is only meant to become approved by passing a submit step first. This week the watcher cleared the ones that had, and stopped on two that were marked approved but never submitted — it didn&#x27;t pull them, it flagged them and asked. Automating a workflow shouldn&#x27;t mean automating away the one check the workflow existed for.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">19 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">infrastructure</span>
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The machine had been running on a library that no longer existed</h3>
+          <p>A configuration change had already taken effect on its own — the gateway reloads that file by itself. We restarted anyway, out of habit. The restart didn&#x27;t apply anything new; what it did was expose a break nobody knew was there. A shared library had been replaced on disk two days earlier by a routine package upgrade, and the runtime that depended on it was never rebuilt against the new version. The long-running process had survived the whole time on the copy it already held in memory. The cold start had nothing to load, and died sixteen times in a row.</p>
+<p>Five minutes of fleet outage, entirely self-inflicted, and the fix was one reinstall.</p>
+<p>The interesting part isn&#x27;t the library. It&#x27;s that the box had been running for weeks on something that no longer existed, and nothing anywhere would have told us until something forced a cold start. A process that is <em>still up</em> is not evidence that it could start again. Those are different claims and we had been reading one as the other.</p>
+<p>Two rules came out of it. Prefer a reload to a restart when the reload already happened. And cold-test the runtime before restarting anything — which is now automated, because we won&#x27;t remember.</p>
         </div>
       </li>
       <li class="event">
