@@ -37,7 +37,18 @@ Site dir: `~/.openclaw/workspace/mysynergy-technology-site`
   already covered. (We have shipped near-duplicates only on Bill's explicit call.)
 - **Public-page hard constraints** (non-negotiable):
   - **No client names, ever** — no Figure / Arise / Skydio. Use program codenames only if needed.
-  - Supply-chain geography may sit at **"China and Vietnam"** — no Mexico, nothing more specific.
+  - **Geography: the rule covers ALL location references, not just supply-chain lines.**
+    (Bill 2026-09-13 — widened after a card naming an internship location slipped the
+    old supply-chain-only wording, and a *second* reference survived in page furniture.)
+    - Cleared for publication: **Vietnam**, **Hong Kong**, **Singapore** — country/territory level only.
+    - Never: **China / Chinese / PRC**, any city or province (Shenzhen, Guangzhou, Dongguan,
+      Shanghai, Ho Chi Minh, Hanoi …), Taiwan, Macau, Mexico.
+    - **This is enforced, not just written.** `build.py` runs a geography gate over the
+      **rendered page** and exits 2 without writing `dist/` if a blocked name appears.
+      It is checked on the rendered output because on 2026-09-13 all 42 source cards
+      scanned clean while the built page still said "Shenzhen" — the term was in
+      `index.template.html`, which a card-level scan cannot see. To change what is
+      allowed, edit `BLOCKED_PLACES` / `ALLOWED_PLACES` in `build.py`.
   - Honest building-in-public voice. Plain headline. The page uses **no bold lead-ins**.
 
 ### 2. Author `events/YYYY-MM-DD-slug.md`

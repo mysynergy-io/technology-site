@@ -125,6 +125,44 @@ def load_events():
                   key=lambda e: e['fm']['date'], reverse=True)
     return pinned + rest
 
+# -- GEOGRAPHY GATE (Bill 2026-09-13) -----------------------------------------
+# The rule applies to ALL location references, not just supply-chain lines, and
+# it is checked on the RENDERED PAGE - not on events/*.md.
+#
+# Why the rendered page: on 2026-09-13 all 42 source cards scanned clean while
+# the built page still said "Shenzhen", because the term lived in
+# index.template.html furniture a card-level scan cannot see. A content rule
+# has to be enforced on what ships.
+BLOCKED_PLACES = [
+    'China', 'Chinese', 'PRC',
+    'Shenzhen', 'Guangzhou', 'Dongguan', 'Guangdong', 'Shanghai', 'Beijing',
+    'Ningbo', 'Yiwu', 'Xiamen', 'Qingdao', 'Kowloon', 'Macau', 'Macao',
+    'Taiwan', 'Mexico', 'Tijuana', 'Monterrey',
+    'Ho Chi Minh', 'Hanoi', 'Haiphong', 'Da Nang', 'Binh Duong', 'Bac Ninh',
+]
+ALLOWED_PLACES = ['Vietnam', 'Hong Kong', 'Singapore']
+
+
+def geography_gate(html_text):
+    """Abort the build if a blocked place name reaches the rendered page."""
+    hits = []
+    for place in BLOCKED_PLACES:
+        for m in re.finditer(r'\b' + re.escape(place) + r'\b', html_text, re.I):
+            a, b = max(0, m.start() - 60), min(len(html_text), m.end() + 60)
+            hits.append((place, ' '.join(html_text[a:b].split())))
+    if hits:
+        print('\nGEOGRAPHY GATE FAILED - blocked place name(s) in the RENDERED page:',
+              file=sys.stderr)
+        for place, ctx in hits:
+            print('  %-12s ...%s...' % (place, ctx), file=sys.stderr)
+        print('\nThe rule covers ALL locations, not only supply-chain lines.',
+              file=sys.stderr)
+        print('Cleared for publication: %s' % ', '.join(ALLOWED_PLACES), file=sys.stderr)
+        print('Nothing was written. Fix events/*.md OR index.template.html, then rebuild.',
+              file=sys.stderr)
+        sys.exit(2)
+
+
 def main():
     DIST.mkdir(exist_ok=True)
     template = TEMPLATE.read_text(encoding='utf-8')
@@ -149,6 +187,7 @@ def main():
         .replace('{{LAST_UPDATED}}', fmt_date(last_event_date.isoformat()))
         .replace('{{EVENT_COUNT}}', str(len(events)))
     )
+    geography_gate(html_out)
     (DIST / 'index.html').write_text(html_out, encoding='utf-8')
     shutil.copy2(ROOT / 'style.css', DIST / 'style.css')
     shutil.copy2(ROOT / 'countdown.js', DIST / 'countdown.js')
