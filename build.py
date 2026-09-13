@@ -128,7 +128,17 @@ def load_events():
 def main():
     DIST.mkdir(exist_ok=True)
     template = TEMPLATE.read_text(encoding='utf-8')
-    events = load_events()
+    # --no-events / SITE_NO_EVENTS=1 : render the site with the public build log
+    # REMOVED, while leaving every events/*.md on disk so writing continues.
+    # Bill 2026-09-13. Revert = build with no flag.
+    suppress = ('--no-events' in sys.argv) or os.environ.get('SITE_NO_EVENTS') == '1'
+    if suppress:
+        template, n = re.subn(
+            r'<section class="log-section">.*?</section>\s*', '', template, flags=re.S)
+        if n != 1:
+            sys.exit('ABORT: expected exactly 1 log-section to strip, matched %d. '
+                     'Template changed - not shipping a half-stripped page.' % n)
+    events = [] if suppress else load_events()
     rendered = '\n'.join(render_event(e['fm'], e['body']) for e in events)
     last_event_date = max(
         (datetime.date.fromisoformat(e['fm']['date']) for e in events),
