@@ -1,1 +1,382 @@
-[]
+[
+  {
+    "src": "2026-04-29-this-page.md",
+    "date": "2026-04-29",
+    "tags": [
+      "website"
+    ],
+    "title": "This page exists because we are building in public",
+    "pinned": true
+  },
+  {
+    "src": "2026-08-26-v1-moved-october.md",
+    "date": "2026-08-26",
+    "tags": [
+      "launch",
+      "website"
+    ],
+    "title": "V1 moved to 26 October"
+  },
+  {
+    "src": "2026-08-12-three-days-on-site.md",
+    "date": "2026-08-12",
+    "tags": [
+      "supply-chain",
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "Three days on site with the people who use it"
+  },
+  {
+    "src": "2026-08-10-false-alarm-costs-more.md",
+    "date": "2026-08-10",
+    "tags": [
+      "verification",
+      "agentic-workflow",
+      "architecture"
+    ],
+    "title": "A false alarm costs more than the outage it warns about"
+  },
+  {
+    "src": "2026-08-07-typo-became-identity.md",
+    "date": "2026-08-07",
+    "tags": [
+      "architecture",
+      "supply-chain",
+      "verification"
+    ],
+    "title": "A mistyped character became a permanent identity"
+  },
+  {
+    "src": "2026-08-05-reviewed-by-a-different-vendor.md",
+    "date": "2026-08-05",
+    "tags": [
+      "agentic-workflow",
+      "verification",
+      "architecture"
+    ],
+    "title": "We have an AI review our AI's code, and we put it on a different vendor"
+  },
+  {
+    "src": "2026-08-03-checks-that-fail-open.md",
+    "date": "2026-08-03",
+    "tags": [
+      "verification",
+      "infrastructure"
+    ],
+    "title": "Five checks that fail open, in the plan written to prevent exactly that"
+  },
+  {
+    "src": "2026-08-01-running-was-true-of-the-process.md",
+    "date": "2026-08-01",
+    "tags": [
+      "infrastructure",
+      "verification",
+      "architecture"
+    ],
+    "title": "\"Running\" was true of the process and false of the function"
+  },
+  {
+    "src": "2026-07-30-asking-nobody.md",
+    "date": "2026-07-30",
+    "tags": [
+      "agentic-workflow",
+      "verification"
+    ],
+    "title": "We were asking for approval, and nobody was being asked"
+  },
+  {
+    "src": "2026-07-28-alarm-that-could-not-ring.md",
+    "date": "2026-07-28",
+    "tags": [
+      "verification",
+      "agentic-workflow",
+      "architecture"
+    ],
+    "title": "The alarm that could not ring"
+  },
+  {
+    "src": "2026-07-26-nine-clean-reviews.md",
+    "date": "2026-07-26",
+    "tags": [
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "Nine clean reviews, and the bug that only existed in the combination"
+  },
+  {
+    "src": "2026-07-24-eighty-seven-files.md",
+    "date": "2026-07-24",
+    "tags": [
+      "infrastructure",
+      "verification"
+    ],
+    "title": "Eighty-seven files were running in production and none of them were in version control"
+  },
+  {
+    "src": "2026-07-21-approved-is-a-claim.md",
+    "date": "2026-07-21",
+    "tags": [
+      "agentic-workflow",
+      "verification",
+      "supply-chain"
+    ],
+    "title": "\"Approved\" is a claim, not a fact"
+  },
+  {
+    "src": "2026-07-19-library-that-was-not-there.md",
+    "date": "2026-07-19",
+    "tags": [
+      "infrastructure",
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "The machine had been running on a library that no longer existed"
+  },
+  {
+    "src": "2026-07-12-config-said-fine.md",
+    "date": "2026-07-12",
+    "tags": [
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "The config said it was fine. Running it said otherwise."
+  },
+  {
+    "src": "2026-07-12-move-the-secret.md",
+    "date": "2026-07-12",
+    "tags": [
+      "security",
+      "architecture",
+      "agentic-workflow"
+    ],
+    "title": "Don't deny the tool — move the secret out of the room"
+  },
+  {
+    "src": "2026-07-04-a-stale-sentence.md",
+    "date": "2026-07-04",
+    "tags": [
+      "agentic-workflow",
+      "architecture"
+    ],
+    "title": "A stale sentence is an outage that never pages anyone"
+  },
+  {
+    "src": "2026-06-27-memory-and-a-backbone.md",
+    "date": "2026-06-27",
+    "tags": [
+      "persistence",
+      "architecture"
+    ],
+    "title": "Giving our agents a memory and a backbone"
+  },
+  {
+    "src": "2026-06-26-study-before-you-adopt.md",
+    "date": "2026-06-26",
+    "tags": [
+      "architecture",
+      "agentic-workflow"
+    ],
+    "title": "Study an open-source framework before you adopt it"
+  },
+  {
+    "src": "2026-06-20-automate-up-to-the-decision.md",
+    "date": "2026-06-20",
+    "tags": [
+      "agentic-workflow",
+      "architecture"
+    ],
+    "title": "Automate everything except the decision"
+  },
+  {
+    "src": "2026-06-19-a-backup-that-fails-differently.md",
+    "date": "2026-06-19",
+    "tags": [
+      "architecture",
+      "reliability"
+    ],
+    "title": "A backup that fails differently"
+  },
+  {
+    "src": "2026-06-16-agents-that-live-in-the-sheet.md",
+    "date": "2026-06-16",
+    "tags": [
+      "agentic-workflow",
+      "architecture"
+    ],
+    "title": "Agents that live in the sheet"
+  },
+  {
+    "src": "2026-06-16-golden-rule-delivery.md",
+    "date": "2026-06-16",
+    "tags": [
+      "delivery-management",
+      "agentic-workflow"
+    ],
+    "title": "The golden rule of delivery management"
+  },
+  {
+    "src": "2026-06-16-let-the-fleet-run.md",
+    "date": "2026-06-16",
+    "tags": [
+      "agentic-workflow",
+      "verification"
+    ],
+    "title": "Let the fleet run, I just watched"
+  },
+  {
+    "src": "2026-06-16-real-database-under-fleet.md",
+    "date": "2026-06-16",
+    "tags": [
+      "persistence",
+      "architecture",
+      "agentic-workflow"
+    ],
+    "title": "What happens when you give an AI agent fleet a real database"
+  },
+  {
+    "src": "2026-06-13-build-where-you-live.md",
+    "date": "2026-06-13",
+    "tags": [
+      "tooling",
+      "agentic-workflow"
+    ],
+    "title": "Build where you live"
+  },
+  {
+    "src": "2026-06-13-dont-rebuild-what-regressed.md",
+    "date": "2026-06-13",
+    "tags": [
+      "debugging",
+      "infrastructure"
+    ],
+    "title": "Don't rebuild what regressed"
+  },
+  {
+    "src": "2026-06-12-discovery-interview-engine.md",
+    "date": "2026-06-12",
+    "tags": [
+      "internship",
+      "discovery",
+      "agentic-workflow"
+    ],
+    "title": "Discovery-interview engine"
+  },
+  {
+    "src": "2026-06-11-first-intern-in.md",
+    "date": "2026-06-11",
+    "tags": [
+      "internship",
+      "agentic-workflow"
+    ],
+    "title": "First intern in"
+  },
+  {
+    "src": "2026-06-11-v1-moved-august.md",
+    "date": "2026-06-11",
+    "tags": [
+      "launch",
+      "website"
+    ],
+    "title": "V1 moved to 26 August"
+  },
+  {
+    "src": "2026-04-30-portal-shipping.md",
+    "date": "2026-04-30",
+    "tags": [
+      "internship",
+      "infrastructure",
+      "launch"
+    ],
+    "title": "Three stages, one Worker"
+  },
+  {
+    "src": "2026-04-18-brand-standards-locked.md",
+    "date": "2026-04-18",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "Brand standards locked"
+  },
+  {
+    "src": "2026-04-15-internship-programme-drafted.md",
+    "date": "2026-04-15",
+    "tags": [
+      "internship",
+      "agentic-workflow"
+    ],
+    "title": "Internship programme drafted"
+  },
+  {
+    "src": "2026-04-10-claude-joins.md",
+    "date": "2026-04-10",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "Claude"
+  },
+  {
+    "src": "2026-04-05-90-day-gantt.md",
+    "date": "2026-04-05",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "90-day plan locked"
+  },
+  {
+    "src": "2026-03-31-harness-goes-on.md",
+    "date": "2026-03-31",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "The harness goes on"
+  },
+  {
+    "src": "2026-03-28-agents-write-directly.md",
+    "date": "2026-03-28",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "Agents started writing directly"
+  },
+  {
+    "src": "2026-03-28-memory-governance.md",
+    "date": "2026-03-28",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "Memory governance"
+  },
+  {
+    "src": "2026-03-27-capability-profiles.md",
+    "date": "2026-03-27",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "Capability profiles per agent"
+  },
+  {
+    "src": "2026-03-25-operational-sheets-multiplied.md",
+    "date": "2026-03-25",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "Operational sheets multiplied"
+  },
+  {
+    "src": "2026-03-24-first-sheet-pbl.md",
+    "date": "2026-03-24",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "First sheet — the Process Build Log"
+  },
+  {
+    "src": "2026-03-05-openclaw-telegram.md",
+    "date": "2026-03-05",
+    "tags": [
+      "agentic-workflow"
+    ],
+    "title": "OpenClaw"
+  }
+]

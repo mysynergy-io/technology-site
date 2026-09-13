@@ -75,6 +75,650 @@
   <p class="countdown__live">Counting down — Hong Kong time, UTC+8</p>
 </section>
 
+<section class="log-section">
+  <div class="log-section__head">
+    <h2 class="log-section__title">Build log</h2>
+    <p class="log-section__sub">42 entries · last updated 26 AUG 2026</p>
+  </div>
+  <ul class="events">
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">29 APR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">website</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>This page exists because we are building in public</h3>
+          <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
+<p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
+<p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">26 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">launch</span>
+              <span class="event__tag">website</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>V1 moved to 26 October</h3>
+          <p>The countdown jumped again — sixty-one days this time. Same reason as June: we would rather ship something real than hit a date with a thin page. That is twice now, which is worth saying plainly rather than letting the number quietly change.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">12 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">supply-chain</span>
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Three days on site with the people who use it</h3>
+          <p>Our supply-chain system had been running in test for months and passing. This month our project lead spent three days in Vietnam, at the premises of the supplier whose operations lead owns two of its sheets, training her team and watching them work.</p>
+<p>Before the visit we did the obvious check: does she have what our existing tester has? She didn&#x27;t — she was short six screens, all of them the delivery and fulfilment chain she personally owns, including the one report that summarises her own two sheets. She was the only tester in the system without it. We would have run three days of training with the person whose work it describes unable to open it.</p>
+<p>They came back with eleven problems. We fixed none of them on the spot, deliberately — every one was diagnosed against live code and data first, because the fastest way to turn one report into three defects is to fix it in the room. Then we asked our reviewer to attack the diagnosis, and it overturned the two we had confidently marked <em>no defect</em>. Both were real. One of them worked only while an order line stayed with a single supplier, which made it operational discipline we had been calling a system guarantee.</p>
+<p>Then it named ten more scenarios missing from the list of eleven entirely. Nobody had reported those, because nobody had hit them yet.</p>
+<p>Three days in a room with the people who do the work found more than the previous month of green test runs. That isn&#x27;t a criticism of the tests. It&#x27;s what tests are for, and what they can&#x27;t do.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">10 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>A false alarm costs more than the outage it warns about</h3>
+          <p>We test against a sandbox company in our accounting system. It is rebuilt roughly every month under a new internal identifier. Our code pins that identifier and fails closed when it stops matching — which is the correct behaviour, and completely silent. Writes simply stop, and someone mid-test watches purchase orders quit working with no explanation.</p>
+<p>So we built a watcher to tell people before it happens. Two rules shaped it, and both came out of the review rather than the design.</p>
+<p>A failed read is never a reset. A dead connection, a rejected credential, an empty list, or no sandbox visible at all — every one of those returns <em>cannot tell</em> and sends nothing. It is tempting to treat &quot;I can&#x27;t see it&quot; as &quot;it&#x27;s gone,&quot; and that is how you send someone chasing a change that never happened. Do that twice and the group learns to ignore the alert, which costs far more than the outage the alert exists for.</p>
+<p>And delivery outranks duplicate suppression. Our first version recorded the event as seen and <em>then</em> sent the message, so a single failed send would have marked it handled and nobody would ever have been told. Inverted: it records what it saw separately from what it successfully delivered, and keeps trying until someone has actually been told.</p>
+<p>An alert system&#x27;s job is not to notice. It&#x27;s to be believed, and to arrive.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">7 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">supply-chain</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>A mistyped character became a permanent identity</h3>
+          <p>Someone typed a zero where the letter belonged, in a free-text field on a delivery record. Nothing checked it, because nothing had ever needed to.</p>
+<p>Downstream, that string was used to build the durable identity of the shipment in our ledger. From that moment the typo was load-bearing. The shipment became invisible to everything matching the real pattern — it was reported, correctly and uselessly, as a missing delivery. And it could no longer be fixed cheaply: the recorder is idempotent on that identity, so changing the number makes the lookup miss and appends a <em>second</em> delivery instead of correcting the first. Two thousand units against an order of one thousand, on a ledger that only ever appends.</p>
+<p>The defect is not the typing. People will always mistype, and a field that a person fills in by hand is not the place to be surprised by that. The defect is that an unvalidated free-text field silently became a key.</p>
+<p>Our first proposal was to warn on a malformed number rather than block it, so a typo could never hold up an invoice. The reviewer rejected the framing outright: a malformed identifier is not cosmetic once it is durable identity, and a warning issued after the bad key exists is toothless. It now refuses before the record is written. The one bad record we already had is grandfathered by its exact combination — not by its shape, which would have let the next one through.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">5 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">verification</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>We have an AI review our AI&#x27;s code, and we put it on a different vendor</h3>
+          <p>As of this month, every code change to our supply-chain system is reviewed by a second AI before it runs. No size threshold. Fixes, refactors and test-only changes included, the plan as well as the implementation. Reviewing it after it lands doesn&#x27;t count. The single exception is a live incident, which ships first and is reviewed immediately after, with the incident written down.</p>
+<p>It runs on a different vendor&#x27;s model, deliberately. A reviewer that shares a provider with the thing it reviews shares its blind spots and its bad days, and goes down in the same outage.</p>
+<p>It has earned the gate in a month. It caught a value that crashed rather than merely slipping through, on the path that handles money. It refused a fix of ours as best-effort and made us do it fail-closed, pointing out that our own argument contradicted itself two sentences apart — and it was right. It stopped us replaying weeks-old gaps at real suppliers, where a repair would have read as a fresh request. It reframed what we had filed as a cosmetic typo as durable identity, which is what it actually was. And when we said we had checked everywhere for something, it asked once more, and found a seventh place we had missed.</p>
+<p>The value isn&#x27;t a second opinion. It&#x27;s a reviewer with no stake in the design being right.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">3 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">infrastructure</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Five checks that fail open, in the plan written to prevent exactly that</h3>
+          <p>After the failover we wrote a disaster-recovery plan with guards in it, so the thing that had just happened could not happen again. Then it was reviewed, and the review found five defects — every one of them in a guard, and every one the same disease the plan was written to cure.</p>
+<p>A guard meant to refuse a dangerous sync blocked only on an empty value or one exact lowercase string; anything truncated or corrupted sailed through, including the case that caused the incident. A restore probe looped over the output of a remote command, so when the connection was refused the loop body never ran and the check passed having examined zero files. A gap counter was set inside a piped loop and lost to a subshell, so the preflight always exited clean. The marker file that decides which machine is the primary was itself copied by the sync it governs — the mechanism would have destroyed itself on the first successful run. And a heartbeat assertion read the log file that is the job&#x27;s own output, so a blocked run refreshed it and passed.</p>
+<p>Not one was found by the person who wrote them, and that person was writing the doctrine against this exact failure at the same time. Knowing the pattern by name is not protection from it. An independent reader is.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">1 AUG 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">infrastructure</span>
+              <span class="event__tag">verification</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>&quot;Running&quot; was true of the process and false of the function</h3>
+          <p>We ran the fleet from the backup host for a few days. Our own notes said the backup was serving. It was serving a subset — and we didn&#x27;t know that, because the status board said everything was up.</p>
+<p>Three faults were stacked underneath. A required library was missing from the backup&#x27;s runtime, so the listener crash-looped and two of our checks had been failing on every ten-minute sweep since cutover. A tunnel binary wasn&#x27;t installed, and both service definitions hard-coded a processor-architecture path that doesn&#x27;t exist on that machine. And the old primary still held the tunnel registration, so traffic was being routed to a host that refused it.</p>
+<p>The sweep process was alive throughout. That&#x27;s what the board was reporting — a process, not a function. Every event and every request routed through that pipeline in those days was lost, and the indicator next to it said Running the entire time.</p>
+<p>While chasing something unrelated, we opened the sheet where backup health is logged. Its most recent entry was dated four months earlier. Neither job had recorded a single run since April, and the last rows named a machine two moves out of date. The surface we monitor to know the backups are fine had been silent since spring, and the silence had been reading as <em>nothing to report</em>.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">30 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>We were asking for approval, and nobody was being asked</h3>
+          <p>Our agents request human approval by commenting on the record and tagging the person who has to decide. The comments were going out. They read correctly. They notified no one — the platform only alerts on an account address, and a plain name with an at-sign in front of it is just prose. We had built a polite request into the void.</p>
+<p>Nothing errored, because nothing failed. A comment was posted, exactly as designed. The only reason we found it is that a person asked why a decision was taking so long.</p>
+<p>The one-line fix was the easy part. The durable fix was refusing to let any part of the system type a person&#x27;s address at the point of use: there is now a single registry of who exists, every alert resolves a name through it, an unknown name raises rather than degrading, and a test fails the build if an address is hard-coded at a call site. When a person changes, one line changes.</p>
+<p>A notification you can watch leave is not a notification anyone received. We check the receiving end now — and we found two more of these later, on a different surface, for the same reason.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">28 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The alarm that could not ring</h3>
+          <p>We audited our own monitoring and found an alarm for records that arrive but never get registered. It sat in the table with a twenty-minute threshold, next to the others, looking like a thing that worked.</p>
+<p>Its trigger name appears nowhere else in the codebase. No classifier could ever produce it, and nothing scanned that sheet at all. It had never fired because it was structurally incapable of firing. Underneath it, a third of a test run had been sitting untouched for a full day.</p>
+<p>The lesson is not that we forgot to wire it up. It&#x27;s that the whole process — us included — reads silence as health. For a day, everyone looked at a quiet dashboard and concluded nothing was wrong, and the dashboard was quiet because it was disconnected. An alert you have never seen fire and an alert that cannot fire look identical from the outside, and the second one is worse than having no alert at all, because it occupies the space where a real one would go.</p>
+<p>We now require every alarm to prove it can ring — a test that deliberately creates the condition and asserts the alert appears. Not that the code is correct. That the alarm <em>reaches someone</em>.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">26 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Nine clean reviews, and the bug that only existed in the combination</h3>
+          <p>We shipped a consolidated batch of eighteen changes in three waves. Every wave was reviewed. Nine separate reviews, each one clean, each one honest.</p>
+<p>Then we did a whole-branch review over the composed difference — everything together, as it would actually run — and it found a real defect that all nine had missed. A blank or conflicting purchase-order number made the intake agent falsely report a missing part number on perfectly valid lines and strand the record. Every per-task review had happened to use a valid number, so every per-task review passed correctly. The bug did not exist in any single change. It existed in the combination.</p>
+<p>That&#x27;s the uncomfortable bit. Nobody was careless. There was no review to point at and say <em>you should have caught this</em>, because the thing to catch wasn&#x27;t inside any of the nine diffs being read.</p>
+<p>So the rule we wrote down is: for changes that cut across each other, whole-branch review is not optional, and it is not a formality after the per-task ones. Nine green reviews of nine correct changes do not add up to a green branch. They add up to nine correct changes and an untested composition.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">24 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">infrastructure</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Eighty-seven files were running in production and none of them were in version control</h3>
+          <p>We went looking for something else and found that eighty-seven Python files had fallen through a deny-all ignore rule and were not under version control at all. Not stale, not on a branch — absent. They were running in production the entire time, doing real work, and any one of them could have been edited or lost with no history and no way to tell what changed. Ten test suites covering already-shipped work were in the same state.</p>
+<p>Nothing was broken, which is exactly why it survived. The system worked, so nobody asked the question that would have surfaced it. The ignore rule was deliberate — deny everything, allow what we name — and it did precisely what it was told. The failure was that adding a file and adding it to the allow list are two actions, and only one of them is enforced by anything.</p>
+<p>All eighty-seven went in that day. The durable change is the assumption we retired: <em>if it&#x27;s running, it must be committed</em> was never true, and we had no check that could have told us otherwise. We have one now.</p>
+<p>There&#x27;s a version of this in every codebase that has ever had a convenient ignore rule. It&#x27;s worth twenty seconds to go and look.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">21 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">verification</span>
+              <span class="event__tag">supply-chain</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>&quot;Approved&quot; is a claim, not a fact</h3>
+          <p>Part of our supply-chain system acts on purchase orders the moment they&#x27;re marked &quot;approved&quot; in the accounting system — pulls the document, records the order, moves on. The risk hides in plain sight: the software trusts a status, and anything that reaches that status gets acted on.</p>
+<p>So it doesn&#x27;t take the status on faith. An order is only meant to become approved by passing a submit step first. This week the watcher cleared the ones that had, and stopped on two that were marked approved but never submitted — it didn&#x27;t pull them, it flagged them and asked. Automating a workflow shouldn&#x27;t mean automating away the one check the workflow existed for.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">19 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">infrastructure</span>
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The machine had been running on a library that no longer existed</h3>
+          <p>A configuration change had already taken effect on its own — the gateway reloads that file by itself. We restarted anyway, out of habit. The restart didn&#x27;t apply anything new; what it did was expose a break nobody knew was there. A shared library had been replaced on disk two days earlier by a routine package upgrade, and the runtime that depended on it was never rebuilt against the new version. The long-running process had survived the whole time on the copy it already held in memory. The cold start had nothing to load, and died sixteen times in a row.</p>
+<p>Five minutes of fleet outage, entirely self-inflicted, and the fix was one reinstall.</p>
+<p>The interesting part isn&#x27;t the library. It&#x27;s that the box had been running for weeks on something that no longer existed, and nothing anywhere would have told us until something forced a cold start. A process that is <em>still up</em> is not evidence that it could start again. Those are different claims and we had been reading one as the other.</p>
+<p>Two rules came out of it. Prefer a reload to a restart when the reload already happened. And cold-test the runtime before restarting anything — which is now automated, because we won&#x27;t remember.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">12 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The config said it was fine. Running it said otherwise.</h3>
+          <p>We shipped a new reporting capability for the fleet and reviewed it the usual way — read the config, trace the logic, convince ourselves it&#x27;s correct. It looked clean. Then we did the thing that actually counts: we handed it to an agent and told it to use the feature for real. It found two defects in minutes that no amount of reading the configuration would have surfaced.</p>
+<p>Reading code proves what you <em>intended</em>. Running it proves what you <em>built</em>. For an autonomous system those drift apart quietly, because nobody is sitting there to notice the gap. So &quot;it&#x27;s correct&quot; is not a claim we let ourselves make from a config diff any more — a capability isn&#x27;t done until an agent has driven it end to end and come back with either a result or a bug.</p>
+<p>Evidence before assertions. Every time.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">12 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">security</span>
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Don&#x27;t deny the tool — move the secret out of the room</h3>
+          <p>When you give an AI agent a shell, the honest question isn&#x27;t &quot;which commands do we forbid&quot; — it&#x27;s &quot;what can it read.&quot; We checked, and the answer was uncomfortable: an agent running a task could reach the same credential files the rest of the system used. Denying a tool in config didn&#x27;t change that; the process still had the file.</p>
+<p>So we stopped trying to fence the tool and moved the thing worth stealing. Secrets now live behind a broker that runs as its own user. An agent asks the broker to <em>perform</em> an action — send this mail, sign this request — and the broker does it and hands back the result. The token itself never enters the agent&#x27;s sandbox. The blast radius of a compromised agent shrank from &quot;every secret on the box&quot; to &quot;the specific actions the broker will take on its behalf.&quot;</p>
+<p>The lesson we keep re-learning: a rule that <em>says</em> no is not the same as a wall that <em>is</em> no. Configuration is a promise; isolation is a fact. We&#x27;d rather build the fact.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">4 JUL 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>A stale sentence is an outage that never pages anyone</h3>
+          <p>Our AI agents each act under their own identity on a shared system of record — when one writes something, it&#x27;s stamped as that agent, not a shared login. This week we found that three of them had been quietly convinced they couldn&#x27;t do something they&#x27;d been able to do for months. Nothing errored. Their access was real and had been all along — but their operating instructions still read &quot;you don&#x27;t have this; hand it to someone else.&quot; So, faithfully, they did.</p>
+<p>An agent that believes it lacks a permission behaves exactly like an agent that lacks it. The capability was real; the self-knowledge was missing — and for an autonomous system those are the same thing. We fixed the instruction, then re-ran each agent and asked it, cold, what it could do — because editing a document doesn&#x27;t prove the agent understood it. The answer flipped from &quot;I have to route this through someone else&quot; to &quot;I do this myself, and every action is stamped as me.&quot;</p>
+<p>The instruction had drifted in the first place because there was no single source of truth — the guidance had been hand-copied to each agent and the copies quietly diverged. So the durable fix wasn&#x27;t the wording. It was collapsing everything to one canonical copy, and giving each agent a way to ask the system directly <em>&quot;who am I, and what can I touch?&quot;</em> instead of trusting a list that goes stale.</p>
+<p>We watch credentials and networks like infrastructure. This was the reminder that what an agent <em>believes</em> it can do is infrastructure too — and a stale sentence is an outage that never pages anyone.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">27 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">persistence</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Giving our agents a memory and a backbone</h3>
+          <p>For months our AI agents could <em>do</em> work but couldn&#x27;t <em>remember</em> it. Every order, price, and supplier note lived only in spreadsheets.</p>
+<p>Over the last few days we wired up &quot;Paperclip&quot; — a real database backbone behind the fleet:</p>
+<p>• A live Postgres database that holds the actual order/finance data</p>
+<p>• An always-on service that syncs it both ways with our spreadsheets every 10 minutes</p>
+<p>• A hard budget stop so a runaway agent can&#x27;t rack up cost</p>
+<p>• A built-in firewall so cost data and price data never sit in the same place</p>
+<p>Result: the agents now read and write to a single source of truth instead of guessing. We ran it in shadow mode (watching, not touching the real books) and got a clean go/no-go to proceed — with cutover held until we&#x27;re sure.</p>
+<p>Building in public, one layer at a time.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">26 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Study an open-source framework before you adopt it</h3>
+          <p>We&#x27;ve been evaluating an open-source agent-orchestration framework to sit under our own fleet. The tempting move is to adopt the whole thing and refactor later. We did the opposite — read it one layer at a time, and held all adoption until we actually understood each layer.</p>
+<p>So far we&#x27;ve mapped three: orchestration (how agents take work and report back), persistence (an 85-table data model with a real two-ledger split between cost and price), and execution (how a task actually runs). Each layer taught us where it fits us and where it doesn&#x27;t — its model assumes software repos and diffs; our deliverables are physical packaging and documents, so parts of it map cleanly and parts don&#x27;t.</p>
+<p>The discipline is the point. Understanding before adopting is slower up front and far cheaper than ripping out something you bolted on before you understood it.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">20 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Automate everything except the decision</h3>
+          <p>Automating a step that moves money is where automation earns its scary reputation. So we drew the line on purpose: automate everything up to the irreversible act — and never through it.</p>
+<p>When a transaction is ready, the system now prepares the financial document on its own and checks it against every rule. Then it stops. Nothing is committed until a person approves it, and up to that point it has written nothing that counts. The machine does the preparation; the human keeps the decision.</p>
+<p>The part we&#x27;re proud of is what approval actually means here. It isn&#x27;t a rubber stamp on a snapshot taken minutes or hours ago. At the instant you approve, the system re-checks the live state against what it proposed — and if anything has moved since it asked, it cancels itself and asks again rather than acting on stale numbers. Approving the present, not the past.</p>
+<p>Around all of it: the pipeline runs against a sandbox set of books first, never the real ledger; it keeps a hard wall between cost data and price data; and when something doesn&#x27;t reconcile, it raises a flag instead of guessing. Automation should be most aggressive where mistakes are cheap, and most humble where they&#x27;re permanent.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">19 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">reliability</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>A backup that fails differently</h3>
+          <p>A backup built on the same foundation as the thing it protects isn&#x27;t really a backup. If your primary system goes down because its provider had an outage, a standby running on that same provider is already down too. You find out the redundancy was an illusion at the worst possible moment.</p>
+<p>So we built our orchestration agent a standby that runs on a different AI provider entirely — on purpose. When the primary can&#x27;t be reached, the standby automatically picks up the channel and holds it in a deliberately narrow role: report status, triage, point a human to the fix, and refuse anything heavier. It keeps the lights on for a few hours, not the whole operation, and it steps back the moment the primary recovers.</p>
+<p>The unexpected dividend was the second mind. Because the standby is a genuinely different model, not a copy of the first, it makes a real independent reviewer. On its first real task we pointed it at a system the primary had just built — and it immediately found a live bug the primary couldn&#x27;t see in its own work.</p>
+<p>Redundancy only counts if it fails differently from the thing it&#x27;s backing up. And a second opinion is only worth having if it can actually disagree.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">16 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Agents that live in the sheet</h3>
+          <p>Most automation reads a spreadsheet, does something elsewhere, then writes a result back. We turned that inside out. The sheet isn&#x27;t a data source the agent visits — it&#x27;s the room the agent lives in.</p>
+<p>An agent assigned to a sheet watches its own rows, acts when one changes, and writes its work back in place. The sheet is the interface, the queue, and the audit trail at once — what you see is exactly what the agent sees.</p>
+<p>The guardrails aren&#x27;t prompts politely asking it to behave. They&#x27;re deterministic code gates around every write: an agent can only touch its own rows, only the columns it owns, and every change is logged. We ran it overnight against dozens of adversarial scenarios — zero improper edits.</p>
+<p>When the operating surface is the same one your team already reads, nobody has to ask the agent what it did. It&#x27;s right there.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">16 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">delivery-management</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The golden rule of delivery management</h3>
+          <p>A purchase order is a promise of quantity. We track every one through four states: received → placed → shipped → invoiced.</p>
+<p>The golden rule: for each component, everything placed to suppliers over time = ordered quantity × bill-of-materials factor. When the deal closes cleanly, ordered = placed = shipped = invoiced.</p>
+<p>The math is the easy part. The real work is the exceptions: multi-part assemblies, parts dual-sourced across two suppliers, a BOM that lags what was actually bought, one invoice covering several deliveries. The rule handles ~90% deterministically. For the other 10%, the agent flags for help instead of guessing — asking is a feature, not a failure.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">16 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Let the fleet run, I just watched</h3>
+          <p>Handed the agent fleet 10 real business transactions and told it to replay them end-to-end. Each agent owned one slice of the work. I didn&#x27;t touch a thing — watch-only.</p>
+<p>Result: data 100% correct across all 10. Margins computed, no duplicates, every record matched its source.</p>
+<p>But the automated checker passed 0 of 10 — flagged &quot;missing evidence&quot; on every single one.</p>
+<p>The catch: the fleet wasn&#x27;t wrong. <em>My checker was.</em> The evidence-matcher missed files named for the base order number when the line carried a suffix. The agents did their jobs; the scaffolding I wrote to grade them had the bug.</p>
+<p>Building in public means publishing that part too.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">16 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">persistence</span>
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>What happens when you give an AI agent fleet a real database</h3>
+          <p>Spent the day putting a real persistence layer under a multi-agent fleet. Three things I wanted to prove, all held.</p>
+<p>• Structural firewall. Cost data and price data live in two separate ledgers — they physically cannot touch. The only place they meet is one audited sync, and margin is computed only at that join. You can&#x27;t accidentally leak a supplier cost into a customer-facing number.</p>
+<p>• Shadow, not cutover. Bidirectional sync every 10 minutes against the system-of-record, which stays the single source of truth. The new layer mirrors; it never overrides.</p>
+<p>• A budget that actually stops. Set a hard spend cap, then had an agent try to run anyway. The system rejected it <em>before any execution</em> — no run, no cost.</p>
+<p>Verdict: foundation go, no cutover. Earn trust in shadow first.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">13 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">tooling</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Build where you live</h3>
+          <p>We stopped forcing big builds out of chat and into a terminal. Our operator now completes large multi-step builds inline, in the same Telegram thread he talks in — no turn-caps, no SSH handoff that snaps the workflow mid-build. Tooling should bend to where the work actually happens. Backed by a 1-year headless auth token that ended the recurring 8-hour outages.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">13 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">debugging</span>
+              <span class="event__tag">infrastructure</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Don&#x27;t rebuild what regressed</h3>
+          <p>Our agent&#x27;s Telegram channel had run 7–16s for three months, then suddenly went sluggish. Instinct says redesign. Wrong move. We pulled the time-series, found a hard cliff at one specific change (an async-worker rewrite), and reverted just that. Back to ~4s.</p>
+<p>Lesson: when something with a long working history breaks, it&#x27;s a regression — find the cliff, don&#x27;t redesign the system.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">12 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">internship</span>
+              <span class="event__tag">discovery</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Discovery-interview engine</h3>
+          <p>This week our ops intern is running structured 1:1 discovery interviews across the supply chain — sales, sourcing, regional ops, design. One session a day, sequenced so each conversation builds on the last.</p>
+<p>Each interview is built around a single opener — <em>&quot;walk me through your actual day-to-day&quot;</em> — then probes where the real work lives: the decisions that happen off-sheet, the tacit knowledge nobody&#x27;s written down, the manual workarounds.</p>
+<p>The output isn&#x27;t notes. It&#x27;s a ranked shortlist of which workflows an agent can take over next.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">11 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">internship</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>First intern in</h3>
+          <p>Our first 2026 intern started 1 June, working inside the agent fleet — out in the field and with suppliers across Vietnam, feeding real ground-level detail back to sharpen our Smartsheet agentic workflow. The agents run intake, scheduling and the operational paper trail; the human closes the loop where it counts.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">11 JUN 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">launch</span>
+              <span class="event__tag">website</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>V1 moved to 26 August</h3>
+          <p>The countdown above just jumped ~60 days — that is why. We would rather ship something real than hit a date with a thin page. Building in public means telling you when the date moves too.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">30 APR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">internship</span>
+              <span class="event__tag">infrastructure</span>
+              <span class="event__tag">launch</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Three stages, one Worker</h3>
+          <p>The application portal — three candidate-facing stages plus an agent-API path — is one Cloudflare Worker, one set of static pages, and a few KV + R2 buckets. No app server. No operator standing by during traffic. The form itself does the receiving.</p>
+<p>We tested every stage end-to-end today, including the 90 MB video upload path, the magic-link expiry, and the duplicate-submit gate (it returns a clean 410 instead of a duplicate row).</p>
+<p>Applications open tomorrow night at 20:00 HKT. We will be quiet on the platform for the first 24 hours and watch what real candidates do with it.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">18 APR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Brand standards locked</h3>
+          <p>Brand Guide v1.1 ships four format types programmatically — report, deck, memo, letter — from a single template stack. Pandoc + WeasyPrint + a Python-driven slide builder.</p>
+<p>Anyone on the fleet can produce a polished client artifact in minutes, not hours, and it always looks like ours.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">15 APR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">internship</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Internship programme drafted</h3>
+          <p>Stream D added an internship track: two builders, 90 days, Hong Kong. Recruit, contract, train.</p>
+<p>The recruitment build became a sub-program in its own right — pre-90 work to lock terms. The first concrete training track for the agentic-workflow operating model.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">10 APR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Claude</h3>
+          <p>A Claude Code instance — Anthropic&#x27;s Opus 4.7 model running through the Claude Code CLI — joined the fleet on 10 April.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">5 APR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>90-day plan locked</h3>
+          <p>Wrote what we would ship in 90 days as a Gantt: about 65 tasks across four streams and 9 keystone milestones. Stream A is acquisition (website, intake, client portal); B is build (intake-to-workflow, requirement brief, NPI execution, intelligence layer); C is coordination (sheet structure, KPI dashboards, supplier coordination); D is training and adoption (internship, onboarding, supplier training).</p>
+<p>The countdown above this card targets the V1 launch milestone in stream A.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">31 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The harness goes on</h3>
+          <p>A compliance daemon — the relay enforcer — now watches every send across every channel: agent message, email, Smartsheet comment, Telegram, file delivery. Each send must match a pre-logged request.</p>
+<p>Stage 1 is detect-only — when a byte goes out without authorization, the daemon flags it within seconds. Stage 2 is wired but not turned on; when armed, it kills the offending session and requires re-authorization.</p>
+<p>The harness is the fleet&#x27;s seatbelt.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">28 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Agents started writing directly</h3>
+          <p>Custom plugin tooling shipped that lets every OpenClaw agent post comments, attach files, and update rows on the workspace directly — no human relay.</p>
+<p>Smartsheet API call → OpenClaw plugin → executed in seconds. Any agent that needs to log evidence or coordinate now does so on the same surface where its work is tracked.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">28 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Memory governance</h3>
+          <p>Each agent now has a structured memory directory under tight rules: how memories are written, the four types (user, feedback, project, reference), when to update vs delete.</p>
+<p>The memory governance doctrine sits beside the agents. They use it. They challenge it when it&#x27;s wrong.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">27 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Capability profiles per agent</h3>
+          <p>Each agent in the OpenClaw fleet got a mechanical capability profile — what files it can read, which tools it can call, what shell commands it can execute. The restriction lives in OpenClaw config and is enforced at the gateway.</p>
+<p>Agents cannot escalate themselves. Privilege creep, automated.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">25 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Operational sheets multiplied</h3>
+          <p>Three more sheets joined the workspace within 48 hours: a daily journal, a master audit log, and a registry that tracks every internal markdown document by lifecycle state.</p>
+<p>Smartsheet webhooks were added across the workspace so any change anywhere fires an event back into the OpenClaw gateway. Auditability becomes ambient.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">24 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>First sheet — the Process Build Log</h3>
+          <p>The first internal Smartsheet went live. Every build since — software, doctrine, recruitment, even this build log itself — gets its own row, with a forced PLAN → BUILD → VERIFY shape and evidence attached as markdown.</p>
+<p>About 80 builds have followed in the 5 weeks since. The team that produces them is a small fleet of AI agents — a mix of Claude Sonnet and OpenAI models — orchestrated by the OpenClaw gateway.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">5 MAR 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>OpenClaw</h3>
+          <p>OpenClaw — the agent fleet&#x27;s orchestration framework — came alive at 20:41 SGT on 5 March 2026.</p>
+<p>Telegram joined the same evening as the founder&#x27;s mobile channel: pings the fleet from anywhere, fleet pings back when something needs attention. From here on, the team runs from a phone.</p>
+        </div>
+      </li>
+  </ul>
+</section>
+
 <!--
   POST-DEADLINE: 2026 internship cross-link section hidden.
   Per Bill 2026-05-15: applications closed; this corporate page should no longer
@@ -86,7 +730,7 @@
     <div>
       <p class="cross-link__label">Recruiting</p>
       <h3 class="cross-link__title">2026 Internship — Applications open 1 May 20:00 HKT until 15 May</h3>
-      <p class="cross-link__body">90-day paid programme · Hong Kong remote, Shenzhen onsite · 1 June – 31 August 2026.</p>
+      <p class="cross-link__body">90-day paid programme · Hong Kong · 1 June – 31 August 2026.</p>
     </div>
     <a class="cross-link__btn" id="cl-apply" href="https://mysynergy.io/" rel="noopener">Apply →</a>
   </div>
