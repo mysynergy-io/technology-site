@@ -78,7 +78,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">42 entries · last updated 26 AUG 2026</p>
+    <p class="log-section__sub">59 entries · last updated 26 SEP 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -93,6 +93,298 @@
           <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
 <p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">26 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">governance</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Capability came second on purpose</h3>
+          <p>This phase, the work went into what has to be true before an agent is allowed to act — not into what an agent can do once it is.</p>
+<p>That is a strange thing to spend a phase on. It is also the part that decides whether any of the rest is safe to use.</p>
+<p>We started out trying to make our agents capable of doing more work. We are ending this phase on a harder question: what evidence should exist before an autonomous system is allowed to act inside a real company?</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">25 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">governance</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The builder no longer writes the exam</h3>
+          <p>The undefined test exposed a deeper problem.</p>
+<p>The producer had written the review prompt. A phrase copied into that prompt became a mandatory certification criterion even though nobody had explicitly authorised it.</p>
+<p>That meant the builder could accidentally write the exam its own work would be judged against.</p>
+<p>We changed the rule.</p>
+<p>Review criteria now have to come from a versioned, ratified mandate. The producer can propose a change and an independent reviewer can challenge it, but the producer cannot make a new certification requirement authoritative by putting it in a prompt.</p>
+<p>The mistake stays in the record. The useful part of the mistake is the mechanism we changed so it cannot quietly happen again.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">24 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">governance</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>171 checks passed. Certification still stopped.</h3>
+          <p>The final candidate passed every independent technical check.</p>
+<p>Certification stopped anyway.</p>
+<p>The review mandate named a required &quot;six-property closure test.&quot; Nobody could find a definition of the six properties. The phrase had been carried forward from an architecture document where the test was named but never enumerated.</p>
+<p>The certifier could have invented six plausible properties, run them and moved on.</p>
+<p>It refused.</p>
+<p>That is the moment the governance model became real for us. Unknown did not become pass just because the code looked good. An undefined requirement was treated as undefined.</p>
+<p>The object did not change before certification resumed. The authority around the test did.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">23 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">reliability</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>We stopped fixing the race and removed the race instead</h3>
+          <p>We kept finding new interleavings around the same operation.</p>
+<p>An owner would check that it was current. Another owner would take over. Cleanup would remove a thing that now belonged to the successor. Each fix tightened the comparison, and each new schedule found another moment where the target could change between check and effect.</p>
+<p>Eventually the answer became obvious: stop deleting the target.</p>
+<p>The final design changed the mechanism so ownership generations are append-only and claims cannot expose an empty intermediate state. The dangerous operation disappeared instead of acquiring another guard.</p>
+<p>Concurrency bugs are often described as timing problems. Sometimes the better fix is to remove the operation whose correctness depends on timing.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">22 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">architecture</span>
+              <span class="event__tag">reliability</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Age is not proof of death</h3>
+          <p>We used elapsed time as evidence that a lock owner had disappeared.</p>
+<p>The certifier paused a perfectly live owner, waited until the lock looked old, reclaimed it, and let two consumers commit the same result.</p>
+<p>Nothing crashed. Every individual step was reasonable. The assumption connecting them was not.</p>
+<p>An old lock is not proof of a dead owner.</p>
+<p>We replaced elapsed-time reasoning with ownership and fencing that can distinguish a superseded actor from the current one.</p>
+<p>The general lesson is larger than locks. Time is evidence that something is old. It is not evidence that something is safe to take over.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">21 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">engineering</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The test we added to prove the fix found another bug</h3>
+          <p>We wrote two adversarial tests because our evidence was incomplete.</p>
+<p>One passed.</p>
+<p>The other showed that a lifecycle function could still change state without valid ownership. We had fixed the named mutation path and left a neighbouring convenience path unfenced.</p>
+<p>That is the kind of defect code review can miss because the implementation reads sensibly. The falsifier did not ask whether the code looked right. It tried to perform the forbidden action.</p>
+<p>It succeeded.</p>
+<p>So the candidate was changed before review and the test became permanent.</p>
+<p>A useful test is not one that proves the implementation is correct. It is one that has a genuine chance of proving you wrong.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">19 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">governance</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>We withdrew our own candidate before the reviewer touched it</h3>
+          <p>We submitted a candidate, then audited our own evidence and found two required falsifiers were missing.</p>
+<p>The code might have been correct. That was not the point. We had claimed a level of proof we had not actually produced.</p>
+<p>So we withdrew the candidate from the certification path before the reviewer touched it. The submission remains in the record; it was not deleted or rewritten.</p>
+<p>The next candidate added the missing attempts to break the design.</p>
+<p>One of them found a real defect.</p>
+<p>That is why we keep the failed and withdrawn objects. A clean history tells you only what survived. A useful history tells you what we believed, what challenged it, and where the belief changed.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">18 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The independent answer was no</h3>
+          <p>We submitted an exact candidate to the independent certifier.</p>
+<p>It came back REVISE.</p>
+<p>That was one of the best results the programme could have produced.</p>
+<p>The point of an independent gate is not to produce certificates. It is to make the difference between &quot;the builder thinks this is ready&quot; and &quot;someone without ownership of the design could establish that it is ready.&quot;</p>
+<p>Our candidate did not meet that bar. Neither did several that followed.</p>
+<p>A review system that always agrees with the producer is a formatting step. We wanted a control, and the control said no.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">16 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">security</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The wrong identity looked exactly like a missing repository</h3>
+          <p>We tried to access a private review repository and got &quot;not found.&quot;</p>
+<p>The repository was there.</p>
+<p>The problem was the identity making the request. An ambient credential belonged to a different account, and a private repository quite correctly looked nonexistent to it.</p>
+<p>The dangerous part is how plausible the wrong conclusion was. &quot;Repository missing&quot; and &quot;wrong identity cannot see repository&quot; produced the same surface result.</p>
+<p>So identity is now checked numerically before the work begins, not inferred from whichever credential helper happens to answer first.</p>
+<p>A lot of security failures do not look like security failures. They look like ordinary missing data.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">15 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">infrastructure</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>We gave evidence its own place to live</h3>
+          <p>A review that exists only inside a conversation is difficult to audit later.</p>
+<p>So we moved the certification exchange onto a durable evidence plane. A candidate is submitted as an exact object. The reviewer returns a structured disposition against that object. Corrections create a new candidate rather than rewriting the old one. Earlier failures stay visible.</p>
+<p>The result is a chain you can inspect after everyone has forgotten the details.</p>
+<p>That is important for autonomous systems because memory is not governance. If a future agent wants to know why something is trusted, the answer should not be &quot;because the previous session said so.&quot; It should be able to find the object, the review and the decision that connected them.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">13 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">agentic-workflow</span>
+              <span class="event__tag">governance</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Four agents, four jobs, one human authority</h3>
+          <p>We are building an operating model where different AI agents do different jobs on purpose.</p>
+<p>One builds. One challenges the design. One certifies the exact result. One can operate the surrounding system. None of them gets the full chain of authority.</p>
+<p>The human principal remains the point where certification becomes permission to act.</p>
+<p>This is slower than giving one capable agent a broad credential and a long prompt. It is also much easier to reason about. The builder has an incentive to finish. The reviewer has an incentive to find what is wrong. The certifier has no authority to turn its own decision into an effect.</p>
+<p>We are not trying to remove people from the loop. We are trying to put the person at the decisions that actually require authority.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">11 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">governance</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Merge is not activation</h3>
+          <p>Code can exist without being allowed to act.</p>
+<p>That sounds obvious, but software workflows often collapse several different events into one: merged means approved, approved means ready, ready means running.</p>
+<p>We separated them.</p>
+<p>A builder can produce an object. A reviewer can examine it. A certifier can say the evidence is sufficient. None of those actions turns the object on.</p>
+<p>Activation is a separate authority decision.</p>
+<p>The distinction matters most when the code touches external systems. A technically correct component is not automatically entitled to send a message, move money, change a record or publish something. Capability and authority are different things, and our system now treats them that way.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">9 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">governance</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>We tried to write a waiver and found there was no honest one</h3>
+          <p>We had a control that was operationally inconvenient, so we asked the obvious question: can we write a narrow exception?</p>
+<p>We tried. Every version of the exception either weakened the thing the control was meant to guarantee or moved the same risk somewhere harder to see.</p>
+<p>So the answer was no waiver.</p>
+<p>That is not a failure of flexibility. It is the control doing its job. If an exception cannot be stated without destroying the property being protected, the correct design may be to make the exception impossible.</p>
+<p>A system that can always be overridden is not fail-closed. It is fail-open with paperwork.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">7 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>A collaborator disappeared through an alias</h3>
+          <p>We had a control that compared identities by the way they were written down. The logic looked clean, the tests were green, and one alternate name was enough to make the same underlying thing appear different.</p>
+<p>That is an identity problem disguised as a string problem.</p>
+<p>The fix was not to add another spelling to a list. It was to resolve the identity first and compare what the thing actually is.</p>
+<p>This pattern keeps coming back in automation: paths, users, repositories, records and processes all have names, but names are not authority. When a decision matters, we want to compare the resolved object, not the convenient label we happened to receive.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">5 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">infrastructure</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Freeze it before you trust it</h3>
+          <p>A review of &quot;the current version&quot; is almost meaningless in a system that keeps changing.</p>
+<p>So we stopped reviewing names like latest, current or ready. The thing being reviewed is now an exact object with an exact identifier. Once it enters review, it does not move. If we change one line, we have made a new object and the old decision does not automatically follow it.</p>
+<p>That rule feels fussy until the first time a harmless comment, test adjustment or cleanup changes the thing everyone thought had already been approved.</p>
+<p>Trust needs a fixed subject. Otherwise the certificate is attached to a story about the code rather than to the code itself.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">3 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>We stopped giving the reviewer our reasoning</h3>
+          <p>There is a subtle way to weaken an independent review: explain too much.</p>
+<p>If the builder sends the object together with a long account of why it should be correct, what was difficult, what was already checked and where the likely risks are, the reviewer starts from the builder&#x27;s map. Even when the reviewer is independent, the search space is not.</p>
+<p>We changed that. The reviewer gets the object, the evidence and the mandate. It does not get the builder&#x27;s private reasoning about where to look.</p>
+<p>That makes reviews less comfortable. It also makes them more useful. A reviewer that finds only the things the builder already worried about is a second reader. A reviewer that can find a failure the builder did not imagine is an independent control.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">1 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The reviewer got a clean room</h3>
+          <p>We used to talk about independent review as if independence were a property of the reviewer. It is not. It is also a property of the environment the reviewer is given.</p>
+<p>A reviewer working inside the builder&#x27;s normal workspace can inherit the same files, the same configuration, the same credentials and the same accidental assumptions. Two different people can still be looking through the same window.</p>
+<p>So we changed the shape of the review. The object is reconstructed in a clean environment, the evidence is carried in explicitly, and the reviewer has to establish what is true from that material rather than from whatever happens to be lying around on the builder&#x27;s machine.</p>
+<p>The goal is not cleanliness for its own sake. It is to make the answer reproducible: if the review depends on an invisible local fact, it is not yet evidence.</p>
         </div>
       </li>
       <li class="event">

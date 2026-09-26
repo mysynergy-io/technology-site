@@ -9,6 +9,159 @@
     "pinned": true
   },
   {
+    "src": "2026-09-26-capability-came-second.md",
+    "date": "2026-09-26",
+    "tags": [
+      "governance",
+      "architecture"
+    ],
+    "title": "Capability came second on purpose"
+  },
+  {
+    "src": "2026-09-25-builder-no-longer-writes-exam.md",
+    "date": "2026-09-25",
+    "tags": [
+      "governance",
+      "agentic-workflow"
+    ],
+    "title": "The builder no longer writes the exam"
+  },
+  {
+    "src": "2026-09-24-171-checks-passed-certification-stopped.md",
+    "date": "2026-09-24",
+    "tags": [
+      "governance",
+      "verification"
+    ],
+    "title": "171 checks passed. Certification still stopped."
+  },
+  {
+    "src": "2026-09-23-remove-the-race-instead.md",
+    "date": "2026-09-23",
+    "tags": [
+      "architecture",
+      "reliability"
+    ],
+    "title": "We stopped fixing the race and removed the race instead"
+  },
+  {
+    "src": "2026-09-22-age-is-not-proof-of-death.md",
+    "date": "2026-09-22",
+    "tags": [
+      "architecture",
+      "reliability"
+    ],
+    "title": "Age is not proof of death"
+  },
+  {
+    "src": "2026-09-21-test-meant-to-prove-fix-found-another-bug.md",
+    "date": "2026-09-21",
+    "tags": [
+      "verification",
+      "engineering"
+    ],
+    "title": "The test we added to prove the fix found another bug"
+  },
+  {
+    "src": "2026-09-19-withdrew-our-own-candidate.md",
+    "date": "2026-09-19",
+    "tags": [
+      "verification",
+      "governance"
+    ],
+    "title": "We withdrew our own candidate before the reviewer touched it"
+  },
+  {
+    "src": "2026-09-18-independent-answer-was-no.md",
+    "date": "2026-09-18",
+    "tags": [
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "The independent answer was no"
+  },
+  {
+    "src": "2026-09-16-wrong-identity-looked-like-missing-repository.md",
+    "date": "2026-09-16",
+    "tags": [
+      "security",
+      "verification"
+    ],
+    "title": "The wrong identity looked exactly like a missing repository"
+  },
+  {
+    "src": "2026-09-15-evidence-got-its-own-place.md",
+    "date": "2026-09-15",
+    "tags": [
+      "verification",
+      "infrastructure"
+    ],
+    "title": "We gave evidence its own place to live"
+  },
+  {
+    "src": "2026-09-13-four-agents-four-jobs-one-human-authority.md",
+    "date": "2026-09-13",
+    "tags": [
+      "agentic-workflow",
+      "governance"
+    ],
+    "title": "Four agents, four jobs, one human authority"
+  },
+  {
+    "src": "2026-09-11-merge-is-not-activation.md",
+    "date": "2026-09-11",
+    "tags": [
+      "governance",
+      "architecture"
+    ],
+    "title": "Merge is not activation"
+  },
+  {
+    "src": "2026-09-09-no-honest-waiver.md",
+    "date": "2026-09-09",
+    "tags": [
+      "governance",
+      "verification"
+    ],
+    "title": "We tried to write a waiver and found there was no honest one"
+  },
+  {
+    "src": "2026-09-07-collaborator-disappeared-through-an-alias.md",
+    "date": "2026-09-07",
+    "tags": [
+      "verification",
+      "architecture"
+    ],
+    "title": "A collaborator disappeared through an alias"
+  },
+  {
+    "src": "2026-09-05-freeze-it-before-you-trust-it.md",
+    "date": "2026-09-05",
+    "tags": [
+      "verification",
+      "infrastructure"
+    ],
+    "title": "Freeze it before you trust it"
+  },
+  {
+    "src": "2026-09-03-stop-giving-reviewer-our-reasoning.md",
+    "date": "2026-09-03",
+    "tags": [
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "We stopped giving the reviewer our reasoning"
+  },
+  {
+    "src": "2026-09-01-reviewer-got-a-clean-room.md",
+    "date": "2026-09-01",
+    "tags": [
+      "verification",
+      "architecture"
+    ],
+    "title": "The reviewer got a clean room"
+  },
+  {
     "src": "2026-08-26-v1-moved-october.md",
     "date": "2026-08-26",
     "tags": [
