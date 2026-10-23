@@ -4,9 +4,17 @@ build.py — render mysynergy.technology static site
 
 Reads:  events/*.md  (frontmatter + markdown body)
         index.template.html
-Writes: dist/index.html
-        dist/style.css
-        dist/countdown.js
+Writes: dist/  -> Hostinger /public_html (published by FTP)
+        docs/  -> GitHub Pages at mysynergy-io.github.io/technology-site (published by git push)
+
+TWO PUBLIC SURFACES. Both are live. This script writes BOTH, always, byte-identical.
+2026-09-26 it wrote only dist/, so the 17 September cards went live on Hostinger and never
+reached Pages; Pages served a 26-August snapshot for a further four weeks while the primary
+surface moved on. The hazard had been written down on 2026-09-13 and recurred on the very next
+publish, because a note does not copy a file. Mirroring also fixes the dangerous direction:
+--no-events strips the log from dist/, and an unmirrored docs/ would keep serving every card.
+
+Writing docs/ PUBLISHES NOTHING on its own -- Pages ships on `git push`, Hostinger on FTP.
 
 Frontmatter (YAML-lite, parsed by hand):
   ---
@@ -31,6 +39,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 EVENTS = ROOT / 'events'
 DIST = ROOT / 'dist'
+DOCS = ROOT / 'docs'          # GitHub Pages surface; mirrored from DIST, never built separately
 TEMPLATE = ROOT / 'index.template.html'
 
 def parse_frontmatter(text):
@@ -197,7 +206,41 @@ def main():
         [{'src': e['src'], **e['fm']} for e in events],
         indent=2, ensure_ascii=False
     ), encoding='utf-8')
+    # Mirror to the SECOND public surface. A build that updates one surface and not the other
+    # leaves two different public versions of the same log, which is what happened on 09-26.
+    DOCS.mkdir(exist_ok=True)
+    mirrored = []
+    for fn in ('index.html', 'style.css', 'countdown.js', 'robots.txt', 'events.json'):
+        shutil.copy2(DIST / fn, DOCS / fn)
+        mirrored.append(fn)
+
+    # Refuse to report success on a half-mirrored publish. A MISSING mirror file is the
+    # worst case, not an edge case -- read_bytes() on it used to raise a bare FileNotFoundError
+    # and the refusal message never printed, so the operator got a traceback instead of being
+    # told which surface was short which file.
+    def _bytes_or_none(path):
+        try:
+            return path.read_bytes()
+        except OSError:
+            return None
+
+    drift = []
+    for fn in mirrored:
+        a, b = _bytes_or_none(DIST / fn), _bytes_or_none(DOCS / fn)
+        if a is None:
+            drift.append('%s (missing from dist/)' % fn)
+        elif b is None:
+            drift.append('%s (missing from docs/)' % fn)
+        elif a != b:
+            drift.append('%s (differs)' % fn)
+    if drift:
+        sys.exit('ABORT: docs/ does not match dist/ after mirroring: %s. The two public '
+                 'surfaces would serve different content. Nothing should be published.'
+                 % ', '.join(drift))
+
     print(f'Built {len(events)} events → {DIST/"index.html"}')
+    print(f'Mirrored {len(mirrored)} files → {DOCS}/ (GitHub Pages surface)')
+    print('NOT PUBLISHED YET: Hostinger needs the FTP upload, Pages needs a git push.')
 
 if __name__ == '__main__':
     main()
