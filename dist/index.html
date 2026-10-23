@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MYSynergy — building toward 26 October 2026</title>
-  <meta name="description" content="MYSynergy Global Packaging Technologies. Packaging engineering, rapid prototyping, and supplier coordination, run on an agentic workflow. V1 website launching 26 October 2026.">
-  <meta property="og:title" content="MYSynergy — building toward 26 October 2026">
-  <meta property="og:description" content="Packaging engineering, rapid prototyping, and supplier coordination, run on an agentic workflow. V1 website launching 26 October 2026.">
+  <title>MYSynergy — building toward 26 November 2026</title>
+  <meta name="description" content="MYSynergy Global Packaging Technologies. Packaging engineering, rapid prototyping, and supplier coordination, run on an agentic workflow. V1 website launching 26 November 2026.">
+  <meta property="og:title" content="MYSynergy — building toward 26 November 2026">
+  <meta property="og:description" content="Packaging engineering, rapid prototyping, and supplier coordination, run on an agentic workflow. V1 website launching 26 November 2026.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#043B01">
   <link rel="stylesheet" href="style.css">
@@ -45,8 +45,8 @@
 
 <section class="hero">
   <p class="hero__eyebrow">V1 launches</p>
-  <p class="hero__date" aria-label="26 October 2026">
-    26<span class="hero__date-sep">·</span>10<span class="hero__date-sep">·</span>2026
+  <p class="hero__date" aria-label="26 November 2026">
+    26<span class="hero__date-sep">·</span>11<span class="hero__date-sep">·</span>2026
   </p>
   <p class="hero__lede">
     We are building the website for <em>MYSynergy</em> — a packaging company focused on packaging engineering, rapid prototyping and supplier coordination.
@@ -78,7 +78,7 @@
 <section class="log-section">
   <div class="log-section__head">
     <h2 class="log-section__title">Build log</h2>
-    <p class="log-section__sub">59 entries · last updated 26 SEP 2026</p>
+    <p class="log-section__sub">71 entries · last updated 23 OCT 2026</p>
   </div>
   <ul class="events">
       <li class="event">
@@ -93,6 +93,196 @@
           <p>You found <code>mysynergy.technology</code> — our public face. We are about eight weeks out from V1 going live, so for now this is a countdown clock and a build log.</p>
 <p>The countdown above is real. The build log below this card is what we have shipped so far. We would rather show what we are doing than tell you what we plan to do.</p>
 <p>If you are a candidate for the 2026 internship: applications open 1 May 2026, 20:00 HKT.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">23 OCT 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">launch</span>
+              <span class="event__tag">website</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>V1 moved to 26 November</h3>
+          <p>The countdown moved out thirty-one days. That is the third move, and the two before it are still on this page.</p>
+<p>The reason is the same each time. The operating work kept turning up things worth fixing — an approval step that passed without reading anything, a warning we believed we had sent — and we would rather close those than hold a date with a thin page behind it.</p>
+<p>Three moves means this date is a forecast, not a promise. We publish it anyway, because a countdown nobody explains is worse than one that slips in public.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">19 OCT 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">governance</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>An approval gate that approved nothing</h3>
+          <p>A release step was meant to refuse anything that had not been approved. It reported pass.</p>
+<p>It passed because both halves of its comparison were empty. The approval record was missing, the field it compared against was missing, so the two agreed.</p>
+<p>Nothing was approved. Nothing was refused. The control was reporting health on a question it had never managed to ask.</p>
+<p>Any check that can pass without having read anything needs a case proving it can fail. Otherwise it is a formality wearing the clothes of a control.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">19 OCT 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">infrastructure</span>
+              <span class="event__tag">governance</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>An inspection that changed what it inspected</h3>
+          <p>We ran a built-in command to check which suppliers our platform could reach. It wrote to the main configuration file and left it invalid.</p>
+<p>Nothing broke at the time, because the running system already held the old settings in memory. The damage would have surfaced at the next restart, hours or days later, with no obvious link to the command that caused it.</p>
+<p>We restored from the last good copy, with authorisation.</p>
+<p>A read-only intention does not make an operation read-only. We take a copy before any inspection that touches live configuration.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">19 OCT 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">reliability</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>No notice without a named recipient</h3>
+          <p>A warning cannot leave our systems unless it names someone who can act on it.</p>
+<p>That sounds like it was already true. It was not. The system could produce a correct, well-formed warning about a real problem and send it to nobody — counted as delivered, read by no one.</p>
+<p>That is worse than silence, because it satisfies the part of the process meant to guarantee somebody was told.</p>
+<p>Every exception now has an owner before it can be raised. An alert nobody owns is not an alert.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">18 OCT 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">reliability</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>A warning we believed we had sent</h3>
+          <p>A check exists to tell us when one of our accounting connections stops being identifiable. It fired correctly, once.</p>
+<p>The message failed to leave. The system had already recorded that we had been told, so it never tried again.</p>
+<p>The condition stayed true, in silence, for forty-one days.</p>
+<p>The record was written next to the attempt instead of after a confirmed delivery, so a failed send and a successful one looked identical from the inside. Both are now keyed to something actually accepting the message.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">18 OCT 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">reliability</span>
+              <span class="event__tag">governance</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Asking a tool how to use it spent an audit number</h3>
+          <p>Every piece of work here carries a reference number. They are permanent and never reissued, so the sequence is a record of what we did.</p>
+<p>Running the tool with the help flag issued one.</p>
+<p>Anything it did not recognise as an option was treated as a request for a number, and the help flag was not recognised. Four were spent that way, one of them colliding with a reference already in use.</p>
+<p>The defect had been written down months earlier and left alone, because it never cost anything on a day anyone had time.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">17 OCT 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">delivery-management</span>
+              <span class="event__tag">architecture</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>An order flow built from the schema out</h3>
+          <p>We stood up a demonstration environment for an order-to-delivery flow: the record structure first, then seeded data that exercises it, then the production schedule rendered as a dated plan.</p>
+<p>Building the structure before the content is the slower order and the one that survives. Seeded data shaped to fit a schema tells you the schema works. A schema shaped to fit whatever data arrived tells you nothing.</p>
+<p>It also surfaced a duplicate schedule we had created in passing, which was removed deliberately rather than left to confuse whoever opened it next.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">15 OCT 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">debugging</span>
+              <span class="event__tag">verification</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Two wrong causes before the right one</h3>
+          <p>Our independent review step stopped working. Nothing ships here without it, so the queue stopped with it.</p>
+<p>First we blamed an expired credential and replaced it. No change. Then we reported that the account had lost its entitlement, which would have been a commercial problem with no technical fix. Also wrong.</p>
+<p>The real cause was a tool twenty-one versions out of date, asking for something that had been withdrawn.</p>
+<p>Both wrong answers explained the symptom, which is why we stopped at them. On a mandatory step, a comfortable explanation is the expensive one.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">29 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">verification</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>A correction gets the same scrutiny as the original</h3>
+          <p>A reviewer rejected a change. We corrected it and resubmitted. The correction reintroduced the same problem it was written to remove.</p>
+<p>That happened more than once this month. One fix had to be fixed twice.</p>
+<p>A correction is written by whoever has just finished being wrong about that exact area, in the relief of finally understanding it. That is the worst moment to be trusted and the usual moment to be waved through.</p>
+<p>Corrections now get the same independent review as the work they correct. Every defect we found in a fix was found by someone who did not write it.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">29 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">reliability</span>
+              <span class="event__tag">infrastructure</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The monitor used up the capacity it was watching</h3>
+          <p>We added a monitor so an incoming approval could not sit unnoticed. It checked often, because delay on that queue costs us days.</p>
+<p>It checked often enough to exhaust the service limit, which blinded the very queue it was protecting.</p>
+<p>Days earlier, an older version had read a reply while it was still being written, decided it had seen the whole thing, and marked the item handled.</p>
+<p>A monitor is not a free addition. It spends the same quota and competes with the work it observes, so it needs its own failure review rather than being treated as a window onto someone else&#x27;s.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">28 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">governance</span>
+              <span class="event__tag">agentic-workflow</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>The builder does not decide when it goes live</h3>
+          <p>Three separate roles now sit between a change and production: whoever builds it, an independent party who approves it, and the owner who decides it goes live.</p>
+<p>They answer different questions and they belong to different people.</p>
+<p>When we moved a baseline into service this month, the record said exactly what moved and what did not, with the remaining conditions listed open rather than implied closed.</p>
+<p>The pull is always to collapse these steps, because approved work feels finished and the last signature looks like paperwork. Collapse them and the person who wanted it to succeed is the person who declares it live.</p>
+        </div>
+      </li>
+      <li class="event">
+        <div class="event__meta">
+          <p class="event__date">28 SEP 2026</p>
+          <div class="event__tags">
+              <span class="event__tag">governance</span>
+              <span class="event__tag">security</span>
+          </div>
+        </div>
+        <div class="event__body">
+          <h3>Who may approve our own work</h3>
+          <p>Work here cannot go live until an independent party approves it. The rule only means something if the approver&#x27;s identity cannot be faked.</p>
+<p>We tested a forged approver against the live approval control. It was accepted.</p>
+<p>The control had already passed independent review, which is what made it worth attacking. Approval is evidence that specific questions were asked, not that every future question will come back clean.</p>
+<p>Fixed, re-approved, then activated. Segregation of duties is only as strong as the identity check underneath it.</p>
         </div>
       </li>
       <li class="event">

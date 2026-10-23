@@ -9,6 +9,114 @@
     "pinned": true
   },
   {
+    "src": "2026-10-23-v1-moved-november.md",
+    "date": "2026-10-23",
+    "tags": [
+      "launch",
+      "website"
+    ],
+    "title": "V1 moved to 26 November"
+  },
+  {
+    "src": "2026-10-19-an-approval-gate-that-approved-nothing.md",
+    "date": "2026-10-19",
+    "tags": [
+      "governance",
+      "verification"
+    ],
+    "title": "An approval gate that approved nothing"
+  },
+  {
+    "src": "2026-10-19-an-inspection-that-changed-what-it-inspected.md",
+    "date": "2026-10-19",
+    "tags": [
+      "infrastructure",
+      "governance"
+    ],
+    "title": "An inspection that changed what it inspected"
+  },
+  {
+    "src": "2026-10-19-no-notice-without-a-named-recipient.md",
+    "date": "2026-10-19",
+    "tags": [
+      "reliability",
+      "agentic-workflow"
+    ],
+    "title": "No notice without a named recipient"
+  },
+  {
+    "src": "2026-10-18-a-warning-we-believed-we-had-sent.md",
+    "date": "2026-10-18",
+    "tags": [
+      "reliability",
+      "verification"
+    ],
+    "title": "A warning we believed we had sent"
+  },
+  {
+    "src": "2026-10-18-asking-a-tool-how-to-use-it-spent-an-audit-number.md",
+    "date": "2026-10-18",
+    "tags": [
+      "reliability",
+      "governance"
+    ],
+    "title": "Asking a tool how to use it spent an audit number"
+  },
+  {
+    "src": "2026-10-17-an-order-flow-built-from-the-schema-out.md",
+    "date": "2026-10-17",
+    "tags": [
+      "delivery-management",
+      "architecture"
+    ],
+    "title": "An order flow built from the schema out"
+  },
+  {
+    "src": "2026-10-15-two-wrong-causes-before-the-right-one.md",
+    "date": "2026-10-15",
+    "tags": [
+      "debugging",
+      "verification"
+    ],
+    "title": "Two wrong causes before the right one"
+  },
+  {
+    "src": "2026-09-29-a-correction-gets-the-same-scrutiny-as-the-original.md",
+    "date": "2026-09-29",
+    "tags": [
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "A correction gets the same scrutiny as the original"
+  },
+  {
+    "src": "2026-09-29-the-monitor-used-up-the-capacity-it-was-watching.md",
+    "date": "2026-09-29",
+    "tags": [
+      "reliability",
+      "infrastructure"
+    ],
+    "title": "The monitor used up the capacity it was watching"
+  },
+  {
+    "src": "2026-09-28-the-builder-does-not-decide-when-it-goes-live.md",
+    "date": "2026-09-28",
+    "tags": [
+      "governance",
+      "agentic-workflow"
+    ],
+    "title": "The builder does not decide when it goes live"
+  },
+  {
+    "src": "2026-09-28-who-may-approve-our-own-work.md",
+    "date": "2026-09-28",
+    "tags": [
+      "governance",
+      "security"
+    ],
+    "title": "Who may approve our own work"
+  },
+  {
     "src": "2026-09-26-capability-came-second.md",
     "date": "2026-09-26",
     "tags": [
