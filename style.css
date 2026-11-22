@@ -343,10 +343,49 @@ body {
   border-bottom: 1px solid var(--rule);
 }
 
+/* ── Introduction ───────────────────────────────────── */
+
+.intro {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 32px 0;
+}
+.intro__inner {
+  max-width: 64ch;
+  border-top: 1px solid var(--rule);
+  padding-top: 42px;
+}
+.intro__label {
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate-soft);
+  margin: 0 0 26px 0;
+}
+.intro__lead {
+  font-size: 27px;
+  line-height: 1.32;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: -0.014em;
+  margin: 0 0 24px 0;
+}
+.intro__text {
+  font-size: 17px;
+  line-height: 1.68;
+  color: var(--slate);
+  margin: 0 0 18px 0;
+}
+.intro__text:last-child { margin-bottom: 0; }
+
 /* ── Responsive ─────────────────────────────────────── */
 
 @media (max-width: 720px) {
   .hero { padding: 60px 22px 50px; }
+  .intro { padding: 12px 22px 0; }
+  .intro__inner { padding-top: 32px; }
+  .intro__lead { font-size: 22px; }
+  .intro__text { font-size: 16px; }
   .hero__date { font-size: 56px; }
   .countdown { grid-template-columns: repeat(2, 1fr); }
   .countdown li:nth-child(2) { border-right: 0; }

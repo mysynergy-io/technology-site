@@ -9,11 +9,15 @@ Last verified end-to-end: **2026-06-27** (JOR-20260627-002).
 
 ## Architecture (know this first)
 
-- **Live site is served by Hostinger over FTP** — NOT GitHub Pages.
-  Live = whatever sits in Hostinger `/public_html/`, which is a copy of local `dist/`.
-- **`build.py` only writes `dist/`.** It renders `events/*.md` → `dist/index.html` + `dist/events.json` (+ css/js).
-- **Source of truth = the git repo** `github.com/mysynergy-io/technology-site` (branch `main`). FTP is the deploy; git is the backup/history.
-- ⚠️ **Ignore the `docs/` folder.** It is a stale, divergent leftover (frozen ~2026-06-11). `build.py` does not write it. Do not edit or trust it. (Open cleanup: JOR-20260627-001.)
+- ⚠️ **TWO PUBLIC SURFACES. Both are live.** A publish is not done until both have it.
+  - **Hostinger** serves `mysynergy.technology` from `/public_html/`, a copy of local `dist/`, deployed by FTP.
+  - **GitHub Pages** serves `mysynergy-io.github.io/technology-site` from branch `main`, path `/docs`, deployed by `git push`.
+- **`build.py` writes BOTH `dist/` and `docs/`, byte-identical, and aborts on a half-mirror** (since `ceeb7b2`, 2026-10-23).
+- ⚠️ **This section used to say "ignore `docs/` — `build.py` does not write it." That was wrong and it cost 40 days.**
+  On 2026-09-26 a 17-card publish wrote `dist/` only; Pages kept serving a 26-August snapshot until 2026-10-23.
+  The hazard had been recorded on 2026-09-13 and recurred on the very next publish, because a note does not copy a file.
+  Do not re-introduce a "docs/ is dead" claim without checking `build.py` and `gh api repos/.../pages`.
+- **Source of truth = the git repo** `github.com/mysynergy-io/technology-site` (branch `main`). FTP deploys Hostinger; the push deploys Pages.
 - Runtime is **`/usr/bin/python3` (3.9)** for both `build.py` and the FTP uploader.
 
 ---
@@ -84,7 +88,7 @@ cd ~/.openclaw/workspace/mysynergy-technology-site
 Then eyeball the rendered card in `dist/index.html` — confirm italics/bullets, and that no
 literal `*...*` leaked.
 
-### 5. Deploy to Hostinger (FTP)
+### 5. Deploy to Hostinger (FTP) — surface 1 of 2
 ```
 /usr/bin/python3 ~/scripts/intern_deadline_ftp_tech.py
 ```
@@ -99,12 +103,18 @@ curl -s "https://mysynergy.technology/?cb=$(date +%s)" | grep -c '<your title>' 
 ```
 Confirm count incremented, newest date is correct, title + emphasis render.
 
-### 7. Commit + push (source of truth)
+### 7. Commit + push — surface 2 of 2, and the source of truth
+The push is a DEPLOY, not just a backup: it is what publishes GitHub Pages. Stage `docs/` too.
 ```
-git add events/<new>.md dist/
+git add events/<new>.md dist/ docs/
 git commit -m "Publish build-log card: <Title> (Bill-approved YYYY-MM-DD)"
 git push origin main
 ```
+Then verify Pages the same way as Hostinger, cache-busted:
+```
+curl -s "https://mysynergy-io.github.io/technology-site/events.json?cb=$(date +%s)" | grep -c '"date"'
+```
+Pages can lag a push by a minute or two. A stale read is not a failed deploy — re-read before concluding.
 
 ### 8. Log
 Add a CCL row (sheet `1034007769730948`): Type=Build, Status=PASS, Evidence = FTP result +
@@ -118,6 +128,7 @@ live-verify + commit hash.
 - [ ] Bullets blank-line-separated; `_italic_` not `*italic*`
 - [ ] `build.py` run; local render eyeballed
 - [ ] FTP deploy `5 uploaded, 0 failed`
-- [ ] Live verified (cache-busted) — count + title + render
-- [ ] Committed + pushed to `origin/main`
+- [ ] Hostinger verified (cache-busted) — count + title + render
+- [ ] Committed + pushed to `origin/main` (stage `docs/` — this deploys Pages)
+- [ ] **GitHub Pages verified (cache-busted) — the second surface, same checks**
 - [ ] CCL logged
