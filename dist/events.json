@@ -18,6 +18,69 @@
     "title": "V1 moved to 26 January"
   },
   {
+    "src": "2026-11-04-a-guard-that-refused-everything.md",
+    "date": "2026-11-04",
+    "tags": [
+      "verification",
+      "agentic-workflow"
+    ],
+    "title": "A guard that refuses everything looks exactly like a guard that works"
+  },
+  {
+    "src": "2026-11-01-two-reviewers-one-model.md",
+    "date": "2026-11-01",
+    "tags": [
+      "governance",
+      "agentic-workflow"
+    ],
+    "title": "Two independent reviewers, one model"
+  },
+  {
+    "src": "2026-10-30-one-missing-key-seven-jobs.md",
+    "date": "2026-10-30",
+    "tags": [
+      "infrastructure",
+      "debugging"
+    ],
+    "title": "One credential vanished and seven jobs failed quietly for fifty days"
+  },
+  {
+    "src": "2026-10-28-a-clean-status-is-evidence-of-nothing.md",
+    "date": "2026-10-28",
+    "tags": [
+      "infrastructure",
+      "verification"
+    ],
+    "title": "A clean status line was evidence of nothing"
+  },
+  {
+    "src": "2026-10-27-credentials-denied-was-false.md",
+    "date": "2026-10-27",
+    "tags": [
+      "security",
+      "verification"
+    ],
+    "title": "We said credentials were denied. They were in the environment."
+  },
+  {
+    "src": "2026-10-26-the-cleanup-that-leaked-4gb.md",
+    "date": "2026-10-26",
+    "tags": [
+      "infrastructure",
+      "verification"
+    ],
+    "title": "The thing that cleans up after everyone had not cleaned up after itself"
+  },
+  {
+    "src": "2026-10-25-the-tests-wrote-into-the-log-they-measured.md",
+    "date": "2026-10-25",
+    "tags": [
+      "verification",
+      "infrastructure"
+    ],
+    "title": "The tests were writing into the log they measured"
+  },
+  {
     "src": "2026-10-23-v1-moved-november.md",
     "date": "2026-10-23",
     "tags": [
